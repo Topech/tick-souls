@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqydmebpscy8v"]
+
+[ext_resource type="Script" uid="uid://duky60xmecwsp" path="res://input/input_direction.gd" id="1_f57p7"]
+
+[node name="SimpleMove" type="Node2D"]
+script = ExtResource("1_f57p7")
+up_action = null
+down_action = null
+left_action = null
+right_action = null
+direction = null
