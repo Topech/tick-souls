@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 @export_category("Movement Actions")
 @export var up_action: Enums.Actions = Enums.Actions.MOVE_UP

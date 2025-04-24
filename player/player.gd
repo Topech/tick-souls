@@ -2,33 +2,55 @@ extends Node2D
 
 
 @onready var metrics = $PlayerMetrics.PlayerMetrics.new()
-@onready var character_node = $MovementBody2d
 
 # control nodes
-@onready var input_direction_node = $MovementBody2d/InputDirection
-@onready var control_simple_move_node = $MovementBody2d/ControlSimpleMove
-@onready var player_control_roll = $MovementBody2d/PlayerControlRoll
+@onready var input_direction_node = $InputDirection
+@onready var control_simple_move_node = $ControlSimpleMove
+@onready var player_control_roll = $PlayerControlRoll
+@onready var roll_effect_node = $RollEffect
+@onready var move_effect_node = $MoveEffect
+@onready var suck_effect_node = $SuckEffect
+
 
 # ability nodes
 @onready var ability_suck_blood_node = $AbilitySuckBlood
 
 # ui nodes
-@onready var blood_bar = $MovementBody2d/BloodProgressBar
-	
+@onready var blood_bar = $BloodProgressBar
+
+
+func _input(event: InputEvent) -> void:
+	if (
+		 event.is_action_pressed(Enums.action_as_str(Enums.Actions.MOVE_ROLL))
+	):
+		if (
+			roll_effect_node.enabled 
+			and not ability_suck_blood_node.sucking
+			and not roll_effect_node.triggered
+		):
+			roll_effect_node.trigger()
 
 
 func _process(delta: float) -> void:
-	# process movement and actions
-	if not ability_suck_blood_node.sucking:
-		control_simple_move_node.speed = metrics.speed
-		control_simple_move_node.direction = input_direction_node.direction
-		control_simple_move_node.move_node(delta)
+	# process inputs
+	if move_effect_node.enabled and input_direction_node.direction.is_zero_approx():
+		move_effect_node.trigger()
+	else:
+		move_effect_node.cancel()
 	
-	player_control_roll.roll_direction = input_direction_node.direction
+	# process effects
+	if not suck_effect_node.triggered:
+		move_effect_node.speed = metrics.speed
+		move_effect_node.direction = input_direction_node.direction
+		move_effect_node.apply(delta)
+	
+	roll_effect_node.roll_direction = input_direction_node.direction
+	if roll_effect_node.triggered:
+		roll_effect_node.apply(delta)
 
-	# abilities
-	if not player_control_roll.rolling and ability_suck_blood_node.sucking:
-		metrics.blood += ability_suck_blood_node.get_blood(delta)
-	
+	if not roll_effect_node.triggered and suck_effect_node.triggered:
+		const BLOOD_PER_SEC = 100
+		metrics.blood += BLOOD_PER_SEC * delta
+
 	# update UI
 	blood_bar.value = metrics.blood

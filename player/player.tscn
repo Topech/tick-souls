@@ -1,55 +1,81 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkr5pvw2bknjq"]
+[gd_scene load_steps=11 format=3 uid="uid://bkr5pvw2bknjq"]
 
 [ext_resource type="Script" uid="uid://btblkgunmjv2b" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="PackedScene" uid="uid://cqydmebpscy8v" path="res://input/input_direction.tscn" id="2_g1dw6"]
 [ext_resource type="Texture2D" uid="uid://dodjoysp3vick" path="res://assets/basic_tick.png" id="2_g6k8r"]
 [ext_resource type="PackedScene" uid="uid://dyxeyuyf5ob24" path="res://player/player_metrics.tscn" id="3_g1dw6"]
-[ext_resource type="PackedScene" uid="uid://bqu7bihibmfuu" path="res://control/control_simple_move.tscn" id="3_yw30f"]
-[ext_resource type="PackedScene" uid="uid://cys6dhg44gkx6" path="res://player/player_control_roll.tscn" id="4_qjkh3"]
-[ext_resource type="Script" uid="uid://bectnvfmi1yal" path="res://player/ability_suck_blood.gd" id="7_boad6"]
+[ext_resource type="Script" uid="uid://cf2mh5mh8xog4" path="res://player/roll_effect.gd" id="8_rgyib"]
+[ext_resource type="Script" uid="uid://dp3o8bs03t0xc" path="res://player/move_effect.gd" id="9_hg6s5"]
+[ext_resource type="Script" uid="uid://cnvmughkpjjx7" path="res://player/suck_effect.gd" id="10_8t03j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kqu6x"]
 size = Vector2(13, 14)
 
+[sub_resource type="GDScript" id="GDScript_boad6"]
+script/source = "extends Node
+
+
+@export var node_to_visualise: Node2D
+
+
+var sucking = false
+
+		
+func _process(delta: float) -> void:
+	if Input.is_action_pressed(\"ability_suck_blood\"):
+		sucking = true
+		node_to_visualise.rotation_degrees = 180
+	elif Input.is_action_just_released(\"ability_suck_blood\"):
+		node_to_visualise.rotation_degrees = 0
+		sucking = false
+	else:
+		sucking = false
+		
+
+
+func get_blood(delta: float):
+	if sucking:
+		const BLOOD_PER_SEC = 10
+		return BLOOD_PER_SEC * delta
+	return 0
+"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6k8r"]
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_rkbax")
 
-[node name="MovementBody2d" type="CharacterBody2D" parent="."]
-
-[node name="MovementCollision2d" type="CollisionShape2D" parent="MovementBody2d"]
+[node name="MovementCollision2d" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -7)
 shape = SubResource("RectangleShape2D_kqu6x")
 
-[node name="VisualBody2d" type="StaticBody2D" parent="MovementBody2d"]
+[node name="PlayerMetrics" parent="." instance=ExtResource("3_g1dw6")]
+
+[node name="AbilitySuckBlood" type="Node" parent="." node_paths=PackedStringArray("node_to_visualise")]
+script = SubResource("GDScript_boad6")
+node_to_visualise = NodePath("../VisualBody2d")
+
+[node name="VisualBody2d" type="StaticBody2D" parent="."]
 position = Vector2(0, -7)
 collision_layer = 2
 collision_mask = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="MovementBody2d/VisualBody2d"]
+[node name="Sprite2D" type="Sprite2D" parent="VisualBody2d"]
 position = Vector2(-2, 4)
 texture = ExtResource("2_g6k8r")
 
-[node name="VisualCollision2d" type="CollisionShape2D" parent="MovementBody2d/VisualBody2d"]
+[node name="VisualCollision2d" type="CollisionShape2D" parent="VisualBody2d"]
 shape = SubResource("RectangleShape2D_g6k8r")
 debug_color = Color(0.995147, 0, 0.210292, 0.42)
 
-[node name="InputDirection" parent="MovementBody2d" instance=ExtResource("2_g1dw6")]
+[node name="InputDirection" parent="." instance=ExtResource("2_g1dw6")]
 up_action = 0
 down_action = 1
 left_action = 2
 right_action = 3
 direction = Vector2(0, 0)
 
-[node name="ControlSimpleMove" parent="MovementBody2d" node_paths=PackedStringArray("node_to_move") instance=ExtResource("3_yw30f")]
-node_to_move = NodePath("..")
-
-[node name="PlayerControlRoll" parent="MovementBody2d" node_paths=PackedStringArray("node_to_move", "node_to_rotate") instance=ExtResource("4_qjkh3")]
-node_to_move = NodePath("..")
-node_to_rotate = NodePath("../VisualBody2d")
-
-[node name="BloodProgressBar" type="ProgressBar" parent="MovementBody2d"]
+[node name="BloodProgressBar" type="ProgressBar" parent="."]
 self_modulate = Color(0.991906, 0.127301, 0.297847, 1)
 offset_left = -29.0
 offset_top = -33.0
@@ -59,8 +85,20 @@ rounded = true
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
-[node name="PlayerMetrics" parent="." instance=ExtResource("3_g1dw6")]
+[node name="RollEffect" type="Node" parent="." node_paths=PackedStringArray("target_move_node", "target_rotate_node")]
+script = ExtResource("8_rgyib")
+target_move_node = NodePath("..")
+target_rotate_node = NodePath("../VisualBody2d")
 
-[node name="AbilitySuckBlood" type="Node" parent="." node_paths=PackedStringArray("node_to_visualise")]
-script = ExtResource("7_boad6")
-node_to_visualise = NodePath("../MovementBody2d/VisualBody2d")
+[node name="RollTimer" type="Timer" parent="RollEffect"]
+one_shot = true
+
+[node name="MoveEffect" type="Node" parent="." node_paths=PackedStringArray("target_move_node")]
+script = ExtResource("9_hg6s5")
+target_move_node = NodePath("..")
+
+[node name="SuckEffect" type="Node" parent="." node_paths=PackedStringArray("target_rotate_node")]
+script = ExtResource("10_8t03j")
+target_rotate_node = NodePath("../VisualBody2d")
+
+[connection signal="timeout" from="RollEffect/RollTimer" to="RollEffect" method="_on_roll_timer_timeout"]
