@@ -10,3 +10,4 @@ func apply(delta: float):
 
 func cancel():
 	target_rotate_node.rotation_degrees = 0
+	super.cancel()

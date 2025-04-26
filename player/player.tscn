@@ -4,41 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://cqydmebpscy8v" path="res://input/input_direction.tscn" id="2_g1dw6"]
 [ext_resource type="Texture2D" uid="uid://dodjoysp3vick" path="res://assets/basic_tick.png" id="2_g6k8r"]
 [ext_resource type="PackedScene" uid="uid://dyxeyuyf5ob24" path="res://player/player_metrics.tscn" id="3_g1dw6"]
+[ext_resource type="Script" uid="uid://cmdbn34ujm0yj" path="res://player/walk_event.gd" id="8_hg6s5"]
 [ext_resource type="Script" uid="uid://cf2mh5mh8xog4" path="res://player/roll_effect.gd" id="8_rgyib"]
 [ext_resource type="Script" uid="uid://dp3o8bs03t0xc" path="res://player/move_effect.gd" id="9_hg6s5"]
 [ext_resource type="Script" uid="uid://cnvmughkpjjx7" path="res://player/suck_effect.gd" id="10_8t03j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kqu6x"]
 size = Vector2(13, 14)
-
-[sub_resource type="GDScript" id="GDScript_boad6"]
-script/source = "extends Node
-
-
-@export var node_to_visualise: Node2D
-
-
-var sucking = false
-
-		
-func _process(delta: float) -> void:
-	if Input.is_action_pressed(\"ability_suck_blood\"):
-		sucking = true
-		node_to_visualise.rotation_degrees = 180
-	elif Input.is_action_just_released(\"ability_suck_blood\"):
-		node_to_visualise.rotation_degrees = 0
-		sucking = false
-	else:
-		sucking = false
-		
-
-
-func get_blood(delta: float):
-	if sucking:
-		const BLOOD_PER_SEC = 10
-		return BLOOD_PER_SEC * delta
-	return 0
-"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6k8r"]
 
@@ -50,10 +22,6 @@ position = Vector2(-0.5, -7)
 shape = SubResource("RectangleShape2D_kqu6x")
 
 [node name="PlayerMetrics" parent="." instance=ExtResource("3_g1dw6")]
-
-[node name="AbilitySuckBlood" type="Node" parent="." node_paths=PackedStringArray("node_to_visualise")]
-script = SubResource("GDScript_boad6")
-node_to_visualise = NodePath("../VisualBody2d")
 
 [node name="VisualBody2d" type="StaticBody2D" parent="."]
 position = Vector2(0, -7)
@@ -67,13 +35,6 @@ texture = ExtResource("2_g6k8r")
 [node name="VisualCollision2d" type="CollisionShape2D" parent="VisualBody2d"]
 shape = SubResource("RectangleShape2D_g6k8r")
 debug_color = Color(0.995147, 0, 0.210292, 0.42)
-
-[node name="InputDirection" parent="." instance=ExtResource("2_g1dw6")]
-up_action = 0
-down_action = 1
-left_action = 2
-right_action = 3
-direction = Vector2(0, 0)
 
 [node name="BloodProgressBar" type="ProgressBar" parent="."]
 self_modulate = Color(0.991906, 0.127301, 0.297847, 1)
@@ -91,6 +52,7 @@ target_move_node = NodePath("..")
 target_rotate_node = NodePath("../VisualBody2d")
 
 [node name="RollTimer" type="Timer" parent="RollEffect"]
+wait_time = 0.75
 one_shot = true
 
 [node name="MoveEffect" type="Node" parent="." node_paths=PackedStringArray("target_move_node")]
@@ -100,5 +62,15 @@ target_move_node = NodePath("..")
 [node name="SuckEffect" type="Node" parent="." node_paths=PackedStringArray("target_rotate_node")]
 script = ExtResource("10_8t03j")
 target_rotate_node = NodePath("../VisualBody2d")
+
+[node name="InputDirection" parent="." instance=ExtResource("2_g1dw6")]
+up_action = 0
+down_action = 1
+left_action = 2
+right_action = 3
+direction = Vector2(0, 0)
+
+[node name="WalkEvent" type="Node" parent="."]
+script = ExtResource("8_hg6s5")
 
 [connection signal="timeout" from="RollEffect/RollTimer" to="RollEffect" method="_on_roll_timer_timeout"]

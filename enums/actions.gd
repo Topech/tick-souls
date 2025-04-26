@@ -4,4 +4,5 @@ enum Actions {
 	MOVE_LEFT,
 	MOVE_RIGHT,
 	MOVE_ROLL,
+	ABILITY_SUCK_BLOOD,
 }
