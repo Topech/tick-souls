@@ -1,8 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://ll1pmd436rgx"]
+[gd_scene load_steps=5 format=3 uid="uid://ll1pmd436rgx"]
 
 [ext_resource type="PackedScene" uid="uid://bkr5pvw2bknjq" path="res://player/player.tscn" id="1_ig7tw"]
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_ig7tw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(20, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(885, 20)
+
 [node name="Main" type="Node2D"]
+
+[node name="CrapSkinColour" type="TextureRect" parent="."]
+modulate = Color(0.988033, 0.746327, 0.584283, 1)
+offset_right = 847.0
+offset_bottom = 481.0
+texture = SubResource("CanvasTexture_ig7tw")
 
 [node name="Player" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(380, 270)
+
+[node name="Wall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(-8, 241)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
+position = Vector2(855, 241)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Wall"]
+position = Vector2(424.5, -6)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Wall"]
+position = Vector2(426, 487)
+shape = SubResource("RectangleShape2D_h2yge")
