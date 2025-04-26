@@ -22,28 +22,28 @@ func _process(delta: float) -> void:
 	roll_effect.roll_direction = walk_event.direction
 	
 	# process inputs
-	if (walk_event.triggered and not suck_effect.triggered):
-		walk_effect.trigger()
+	if (walk_event.triggered and not suck_effect.activated):
+		walk_effect.activate()
 	else:
-		walk_effect.cancel()
+		walk_effect.deactivate()
 
 	if (
 		roll_event.triggered
-		and not roll_effect.triggered
-		and not suck_effect.triggered
+		and not roll_effect.activated
+		and not suck_effect.activated
 	):
-		roll_effect.trigger()
+		roll_effect.activate()
 
 	if (
 		suck_event.triggered
-		and not roll_effect.triggered
+		and not roll_effect.activated
 	):
-		suck_effect.trigger()
+		suck_effect.activate()
 	# todo: i don't think 'not triggered' is adequate state.
 	elif not suck_event.triggered:
-		suck_effect.cancel()
+		suck_effect.deactivate()
 
-	if suck_effect.triggered:
+	if suck_effect.activated:
 		const BLOOD_PER_SEC = 10
 		metrics.blood += BLOOD_PER_SEC * delta
 

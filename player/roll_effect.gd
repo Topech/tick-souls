@@ -13,16 +13,16 @@ var locked_roll_direction: Vector2
 @onready var roll_timer = $RollTimer
 
 
-func trigger():
+func activate():
 	if (not roll_direction.is_zero_approx()):
 		locked_roll_direction = roll_direction.normalized()
 		roll_timer.start()
-		super.trigger()
+		super.activate()
 
 
-func cancel():
+func deactivate():
 	target_rotate_node.rotation = 0
-	super.cancel()
+	super.deactivate()
 
 
 func apply(delta: float):
@@ -38,4 +38,4 @@ func apply(delta: float):
 
 
 func _on_roll_timer_timeout() -> void:
-	cancel()
+	deactivate()

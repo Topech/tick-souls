@@ -8,23 +8,23 @@ class_name PlayerEffect extends Node
 #	set(value: bool): ...
 
 ## True if effect meets criteria to run.
-var triggered: bool = false
+var activated: bool = false
 
 
-## runs every tick if effect is enabled and triggered.
+## runs every tick if effect is enabled and activated.
 func apply(delta: float):
 	assert(false, "Override this base fn...")
 
 
 
-func trigger() -> void:
-	triggered = true
+func activate() -> void:
+	activated = true
 	# ...
 
-func cancel() -> void:
-	triggered = false
+func deactivate() -> void:
+	activated = false
 
 
 func _process(delta: float) -> void:
-	if (enabled and triggered):
+	if (enabled and activated):
 		apply(delta)

@@ -8,6 +8,6 @@ func apply(delta: float):
 	target_rotate_node.rotation_degrees = 180
 
 
-func cancel():
+func deactivate():
 	target_rotate_node.rotation_degrees = 0
-	super.cancel()
+	super.deactivate()
