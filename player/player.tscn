@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkr5pvw2bknjq"]
+[gd_scene load_steps=13 format=3 uid="uid://bkr5pvw2bknjq"]
 
 [ext_resource type="Script" uid="uid://btblkgunmjv2b" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="PackedScene" uid="uid://cqydmebpscy8v" path="res://input/input_direction.tscn" id="2_g1dw6"]
 [ext_resource type="Texture2D" uid="uid://dodjoysp3vick" path="res://assets/basic_tick.png" id="2_g6k8r"]
 [ext_resource type="PackedScene" uid="uid://dyxeyuyf5ob24" path="res://player/player_metrics.tscn" id="3_g1dw6"]
+[ext_resource type="Script" uid="uid://rikx34kyj34c" path="res://player/roll_event.gd" id="7_8t03j"]
 [ext_resource type="Script" uid="uid://cmdbn34ujm0yj" path="res://player/walk_event.gd" id="8_hg6s5"]
 [ext_resource type="Script" uid="uid://cf2mh5mh8xog4" path="res://player/roll_effect.gd" id="8_rgyib"]
-[ext_resource type="Script" uid="uid://dp3o8bs03t0xc" path="res://player/move_effect.gd" id="9_hg6s5"]
+[ext_resource type="Script" uid="uid://bbtkth686muil" path="res://player/suck_event.gd" id="9_8t03j"]
+[ext_resource type="Script" uid="uid://dp3o8bs03t0xc" path="res://player/walk_effect.gd" id="9_hg6s5"]
 [ext_resource type="Script" uid="uid://cnvmughkpjjx7" path="res://player/suck_effect.gd" id="10_8t03j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kqu6x"]
@@ -46,6 +48,30 @@ rounded = true
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
+[node name="WalkEvent" type="Node" parent="."]
+script = ExtResource("8_hg6s5")
+
+[node name="InputDirection" parent="WalkEvent" instance=ExtResource("2_g1dw6")]
+up_action = 0
+down_action = 1
+left_action = 2
+right_action = 3
+direction = Vector2(0, 0)
+
+[node name="SuckEvent" type="Node" parent="."]
+script = ExtResource("9_8t03j")
+
+[node name="RollEvent" type="Node" parent="."]
+script = ExtResource("7_8t03j")
+
+[node name="WalkEffect" type="Node" parent="." node_paths=PackedStringArray("target_move_node")]
+script = ExtResource("9_hg6s5")
+target_move_node = NodePath("..")
+
+[node name="SuckEffect" type="Node" parent="." node_paths=PackedStringArray("target_rotate_node")]
+script = ExtResource("10_8t03j")
+target_rotate_node = NodePath("../VisualBody2d")
+
 [node name="RollEffect" type="Node" parent="." node_paths=PackedStringArray("target_move_node", "target_rotate_node")]
 script = ExtResource("8_rgyib")
 target_move_node = NodePath("..")
@@ -54,23 +80,5 @@ target_rotate_node = NodePath("../VisualBody2d")
 [node name="RollTimer" type="Timer" parent="RollEffect"]
 wait_time = 0.75
 one_shot = true
-
-[node name="MoveEffect" type="Node" parent="." node_paths=PackedStringArray("target_move_node")]
-script = ExtResource("9_hg6s5")
-target_move_node = NodePath("..")
-
-[node name="SuckEffect" type="Node" parent="." node_paths=PackedStringArray("target_rotate_node")]
-script = ExtResource("10_8t03j")
-target_rotate_node = NodePath("../VisualBody2d")
-
-[node name="InputDirection" parent="." instance=ExtResource("2_g1dw6")]
-up_action = 0
-down_action = 1
-left_action = 2
-right_action = 3
-direction = Vector2(0, 0)
-
-[node name="WalkEvent" type="Node" parent="."]
-script = ExtResource("8_hg6s5")
 
 [connection signal="timeout" from="RollEffect/RollTimer" to="RollEffect" method="_on_roll_timer_timeout"]
