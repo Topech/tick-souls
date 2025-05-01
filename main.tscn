@@ -39,11 +39,17 @@ shape = SubResource("RectangleShape2D_h2yge")
 position = Vector2(426, 487)
 shape = SubResource("RectangleShape2D_h2yge")
 
+[node name="TweezerSpawnTimer" type="Timer" parent="."]
+wait_time = 9.95
+autostart = true
+
 [node name="Tweezers" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("2_h2yge")]
+position = Vector2(207, 213)
 target_node = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(380, 270)
 
+[connection signal="timeout" from="TweezerSpawnTimer" to="." method="_on_timer_timeout"]
 [connection signal="failed" from="Tweezers" to="." method="_on_tweezers_failed"]
 [connection signal="tweezed_player" from="Tweezers" to="." method="_on_tweezers_tweezed_player"]

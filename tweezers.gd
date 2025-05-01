@@ -42,7 +42,8 @@ func _process(delta: float) -> void:
 			$Shadow/DebugColorRect.color.a += shadow_alpha_rate * delta
 		# finished shadow, end tweeze
 		else:
-			failed.emit()
+			failed.emit(self)
+			#queue_free()
 			
 		if $TweezerVisuals.visible:
 			var overlapping_bodies = $PlayerDetector.get_overlapping_bodies()
