@@ -5,7 +5,7 @@ class_name PlayerEffect extends Node
 
 ## Only operate effect if enabled = true
 @export var enabled: bool = true
-#	set(value: bool): ...
+#=	set(value: bool): ...
 
 ## True if effect meets criteria to run.
 var activated: bool = false
@@ -16,10 +16,10 @@ func apply(delta: float):
 	assert(false, "Override this base fn...")
 
 
-
 func activate() -> void:
-	activated = true
-	# ...
+	if enabled:
+		activated = true
+
 
 func deactivate() -> void:
 	activated = false

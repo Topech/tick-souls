@@ -1,4 +1,4 @@
-extends Node2D
+class_name Player extends Node2D
 
 @onready var metrics = $PlayerMetrics.PlayerMetrics.new()
 
@@ -6,6 +6,7 @@ extends Node2D
 @onready var walk_event = $WalkEvent
 @onready var roll_event = $RollEvent
 @onready var suck_event = $SuckEvent
+@onready var tweeze_event = $TweezeEvent
 
 @onready var roll_effect = $RollEffect
 @onready var walk_effect = $WalkEffect
@@ -20,6 +21,12 @@ func _process(delta: float) -> void:
 	walk_effect.speed = metrics.speed
 	walk_effect.direction = walk_event.direction
 	roll_effect.roll_direction = walk_event.direction
+	
+	if tweeze_event.triggered:
+		walk_effect.enabled = false
+		roll_effect.enabled = false
+		suck_effect.enabled = false
+		return
 	
 	# process inputs
 	if (walk_event.triggered and not suck_effect.activated):
@@ -49,3 +56,7 @@ func _process(delta: float) -> void:
 
 	# update UI
 	blood_bar.value = metrics.blood
+
+
+func tweeze():
+	tweeze_event.trigger()
