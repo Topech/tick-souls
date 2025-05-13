@@ -46,7 +46,11 @@ shape = SubResource("RectangleShape2D_h2yge")
 wait_time = 9.95
 autostart = true
 
-[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+[node name="Player1" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(380, 270)
+
+[node name="Player2" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(584, 277)
+device_id = 1
 
 [connection signal="timeout" from="TweezerSpawnTimer" to="." method="_on_timer_timeout"]

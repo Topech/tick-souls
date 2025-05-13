@@ -1,5 +1,10 @@
 class_name Player extends Node2D
 
+
+@export var device_id: int
+
+
+
 @onready var metrics = $PlayerMetrics.PlayerMetrics.new()
 
 # control nodes
@@ -14,6 +19,7 @@ class_name Player extends Node2D
 
 # ui nodes
 @onready var blood_bar = $BloodProgressBar
+
 
 
 func _process(delta: float) -> void:

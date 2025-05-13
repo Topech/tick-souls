@@ -1,5 +1,7 @@
 extends PlayerEvent
 
+
+
 @onready var input_direction_node = $InputDirection
 @onready var direction: Vector2 = input_direction_node.direction
 
