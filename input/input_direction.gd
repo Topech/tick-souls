@@ -1,7 +1,7 @@
 extends Node
 
 
-var device_id: int
+var device_id: int = PlayerInputDevices.INVALID_DEVICE
 
 
 @export_group("Movement Actions")
@@ -14,12 +14,10 @@ var device_id: int
 @export var direction = Vector2(0, 0)
 
 
-# todo: move to its own thing
-func _physics_process(delta: float) -> void:
+func _ready() -> void:
 	var player: Player = owner
 	var players_device_id = player.device_id
-	if players_device_id != null:
-		device_id = players_device_id
+	device_id = players_device_id
 	
 
 var up_strength: float = 0

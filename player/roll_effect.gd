@@ -13,6 +13,15 @@ var locked_roll_direction: Vector2
 @onready var roll_timer = $RollTimer
 
 
+var device_id: int = PlayerInputDevices.INVALID_DEVICE
+
+
+func _ready() -> void:
+	var player: Player = owner
+	var players_device_id = player.device_id
+	device_id = players_device_id
+
+
 func activate():
 	if (not roll_direction.is_zero_approx()):
 		locked_roll_direction = roll_direction.normalized()

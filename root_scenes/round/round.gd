@@ -19,11 +19,11 @@ func _on_tweezers_failed(tweezer: Tweezers) -> void:
 
 func _on_timer_timeout() -> void:
 	var tweezers = preload("res://tweezers/tweezers.tscn").instantiate()
-	var player_id = PlayerInputDevices.get_all_players()[
-		round(randf() * len(PlayerInputDevices.get_all_players()) - 1)
+	var players = player_container.get_all_players()
+	var player = players[
+		round(randf() * len(players) - 1)
 	]
-	tweezers.target_node = $PlayerSpawner/PlayerContainer.get_player_by_id(player_id)
+	tweezers.target_node = player
 	add_child(tweezers)
 	tweezers.failed.connect(_on_tweezers_failed)
 	$TweezerSpawnTimer.wait_time = 10
-	#$TweezerSpawnTimer.start()
