@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bkr5pvw2bknjq"]
+[gd_scene load_steps=14 format=3 uid="uid://bkr5pvw2bknjq"]
 
 [ext_resource type="Script" uid="uid://btblkgunmjv2b" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="PackedScene" uid="uid://cqydmebpscy8v" path="res://input/input_direction.tscn" id="2_g1dw6"]
 [ext_resource type="Texture2D" uid="uid://dodjoysp3vick" path="res://assets/basic_tick.png" id="2_g6k8r"]
 [ext_resource type="Script" uid="uid://kod7kr5fsols" path="res://player/visual_body_2d.gd" id="3_2ieo8"]
-[ext_resource type="PackedScene" uid="uid://dyxeyuyf5ob24" path="res://player/player_metrics.tscn" id="3_g1dw6"]
 [ext_resource type="Script" uid="uid://rikx34kyj34c" path="res://player/roll_event.gd" id="7_8t03j"]
 [ext_resource type="Script" uid="uid://cmdbn34ujm0yj" path="res://player/walk_event.gd" id="8_hg6s5"]
 [ext_resource type="Script" uid="uid://cf2mh5mh8xog4" path="res://player/roll_effect.gd" id="8_rgyib"]
@@ -24,8 +23,6 @@ script = ExtResource("1_rkbax")
 [node name="MovementCollision2d" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -7)
 shape = SubResource("RectangleShape2D_kqu6x")
-
-[node name="PlayerMetrics" parent="." instance=ExtResource("3_g1dw6")]
 
 [node name="VisualBody2d" type="StaticBody2D" parent="."]
 position = Vector2(0, -7)
