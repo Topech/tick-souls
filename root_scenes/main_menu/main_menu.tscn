@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8nfxa5msculm"]
+[gd_scene load_steps=4 format=3 uid="uid://c8nfxa5msculm"]
 
 [ext_resource type="Script" uid="uid://bqle7g5rho6gu" path="res://root_scenes/main_menu/main_menu.gd" id="1_56bkm"]
 [ext_resource type="Script" uid="uid://bngwc846ablmb" path="res://controller_detector.gd" id="2_u4xch"]
+[ext_resource type="Script" uid="uid://c4f1sl3w8m73c" path="res://root_scenes/main_menu/player_indicator.gd" id="3_sy3t8"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -16,12 +17,87 @@ script = ExtResource("1_56bkm")
 script = ExtResource("2_u4xch")
 
 [node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 296.0
-offset_top = 231.0
-offset_right = 342.0
-offset_bottom = 262.0
-scale = Vector2(5.297, 3)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -15.5
+offset_right = 23.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Start"
+
+[node name="PlayerIndicator1" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 49.0
+offset_right = 91.0
+offset_bottom = 89.0
+color = Color(0.440979, 0.440979, 0.440979, 1)
+script = ExtResource("3_sy3t8")
+player_id = 1
+
+[node name="Label" type="Label" parent="PlayerIndicator1"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 9.0
+offset_right = 108.0
+offset_bottom = 32.0
+text = "Player 1"
+
+[node name="PlayerIndicator2" type="ColorRect" parent="."]
+offset_left = 52.0
+offset_top = 98.0
+offset_right = 92.0
+offset_bottom = 138.0
+color = Color(0.440979, 0.440979, 0.440979, 1)
+script = ExtResource("3_sy3t8")
+player_id = 2
+
+[node name="Label" type="Label" parent="PlayerIndicator2"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 9.0
+offset_right = 108.0
+offset_bottom = 32.0
+text = "Player 2"
+
+[node name="PlayerIndicator3" type="ColorRect" parent="."]
+offset_left = 52.0
+offset_top = 147.0
+offset_right = 92.0
+offset_bottom = 187.0
+color = Color(0.440979, 0.440979, 0.440979, 1)
+script = ExtResource("3_sy3t8")
+player_id = 3
+
+[node name="Label" type="Label" parent="PlayerIndicator3"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 9.0
+offset_right = 108.0
+offset_bottom = 32.0
+text = "Player 3"
+
+[node name="PlayerIndicator4" type="ColorRect" parent="."]
+offset_left = 52.0
+offset_top = 194.0
+offset_right = 92.0
+offset_bottom = 234.0
+color = Color(0.440979, 0.440979, 0.440979, 1)
+script = ExtResource("3_sy3t8")
+player_id = 4
+
+[node name="Label" type="Label" parent="PlayerIndicator4"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 9.0
+offset_right = 108.0
+offset_bottom = 32.0
+text = "Player 4"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
