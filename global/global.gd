@@ -10,4 +10,4 @@ enum players {
 	PLAYER_4
 }
 
-var all_players = Array(Global.players.values()).filter(func(x): return x != Global.players.NO_PLAYER)
+var all_possible_players = Array(Global.players.values()).filter(func(x): return x != Global.players.NO_PLAYER)

@@ -3,12 +3,16 @@ class_name PlayerEffect extends Node
 ## Designed to expose a syncronous API to simplify delegation.
 
 
+signal activated
+signal deactivated
+
+
 ## Only operate effect if enabled = true
 @export var enabled: bool = true
 #=	set(value: bool): ...
 
 ## True if effect meets criteria to run.
-var activated: bool = false
+var is_activated: bool = false
 
 
 ## runs every tick if effect is enabled and activated.
@@ -18,13 +22,15 @@ func apply(delta: float):
 
 func activate() -> void:
 	if enabled:
-		activated = true
+		is_activated = true
+		activated.emit()
 
 
 func deactivate() -> void:
-	activated = false
+	is_activated = false
+	deactivated.emit()
 
 
 func _process(delta: float) -> void:
-	if (enabled and activated):
+	if (enabled and is_activated):
 		apply(delta)

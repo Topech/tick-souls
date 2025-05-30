@@ -1,7 +1,7 @@
 extends Node
 
 
-var device_id: int = PlayerInputDevices.INVALID_DEVICE
+var device_id: int
 
 
 @export_group("Movement Actions")
@@ -13,12 +13,6 @@ var device_id: int = PlayerInputDevices.INVALID_DEVICE
 @export_group("Outputs")
 @export var direction = Vector2(0, 0)
 
-
-func _ready() -> void:
-	var player: Player = owner
-	var players_device_id = player.device_id
-	device_id = players_device_id
-	
 
 var up_strength: float = 0
 var down_strength: float = 0

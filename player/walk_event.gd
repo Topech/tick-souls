@@ -1,9 +1,14 @@
 extends PlayerEvent
 
 
+var input_direction_node: Node
+var direction: Vector2 = Vector2.ZERO
 
-@onready var input_direction_node = $InputDirection
-@onready var direction: Vector2 = input_direction_node.direction
+
+func _ready():
+	super._ready()
+	input_direction_node = $InputDirection
+	input_direction_node.device_id = player_device.device_id
 
 
 func _process(delta: float) -> void:

@@ -5,6 +5,6 @@ extends ColorRect
 
 
 func _process(delta: float) -> void:
-	var device_id = PlayerInputDevices.get_players_device(player_id)
-	if device_id != PlayerInputDevices.INVALID_DEVICE:
+	var player_device = PlayerInputDevices.get_players_device(player_id)
+	if not player_device.is_invalid():
 		color = Color.GREEN
