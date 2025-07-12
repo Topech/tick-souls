@@ -8,4 +8,3 @@ func _on_main_menu_start_game() -> void:
 	add_child(round)
 	var main_menu = $MainMenu
 	remove_child(main_menu)
-	

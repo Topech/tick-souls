@@ -5,12 +5,21 @@ const INVALID_DEVICE = 120
 
 var player_id: Global.players
 var device_id: int
+var is_keyboard: bool
 var _is_invalid: bool = false
 
 
 func _init(player_id: Global.players, device_id: int) -> void:
 	self.player_id = player_id
 	self.device_id = device_id
+	self.is_keyboard = false
+
+
+static func create_keyboard_device(player_id: Global.players) -> PlayerDevice:
+	const KEYBOARD_DEVICE_ID: int = 0
+	var instance = PlayerDevice.new(player_id, KEYBOARD_DEVICE_ID)
+	instance.is_keyboard = true
+	return instance
 
 
 static func create_invalid(player_id: Global.players) -> PlayerDevice:
@@ -24,5 +33,11 @@ func is_invalid():
 
 
 func check_owns_input(event: InputEvent):
-	return event.device == device_id
+	if not is_keyboard and event is InputEventJoypadButton:
+		return event.device == device_id
+	
+	elif is_keyboard and event is InputEventKey:
+		return true
+	
+	return false
 	

@@ -1,6 +1,6 @@
 extends Node
 
-var devices_detected: Array[int] = []
+var joy_devices_detected: Array[int] = []
 
 enum players {
 	NO_PLAYER=0,

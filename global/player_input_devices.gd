@@ -3,14 +3,22 @@ extends Node
 
 var _player_device_lookup = {}
 
+var keyb_assigned_to_player: bool = false
+
 
 func get_players_device(player: Global.players) -> PlayerDevice:
 	return _player_device_lookup.get(player, PlayerDevice.create_invalid(player))
 
 
-func set_players_device(player: Global.players, device_id: int) -> void:
+func set_player_joy_device(player: Global.players, device_id: int) -> void:
 	if player != Global.players.NO_PLAYER:
 		var player_device = PlayerDevice.new(player, device_id)
+		_player_device_lookup.set(player, player_device)
+
+
+func set_player_keyb_device(player: Global.players) -> void:
+	if player != Global.players.NO_PLAYER:
+		var player_device = PlayerDevice.create_keyboard_device(player)
 		_player_device_lookup.set(player, player_device)
 
 
