@@ -82,7 +82,11 @@ target_rotate_node = NodePath("../VisualBody2d")
 wait_time = 0.75
 one_shot = true
 
+[node name="RollCooldownTimer" type="Timer" parent="RollEffect"]
+one_shot = true
+
 [node name="TweezeEvent" type="Node" parent="."]
 script = ExtResource("12_ebec5")
 
 [connection signal="timeout" from="RollEffect/RollTimer" to="RollEffect" method="_on_roll_timer_timeout"]
+[connection signal="timeout" from="RollEffect/RollCooldownTimer" to="RollEffect" method="_on_roll_cooldown_timer_timeout"]

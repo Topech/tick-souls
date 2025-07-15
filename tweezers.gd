@@ -21,7 +21,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if not tweezed_player_node:
-		var tweezer_follow_rate: int = 200
+		var tweezer_follow_rate: int = 100
 		var shadow_shrink_rate: float = 0.1
 		var shadow_alpha_rate: float = 0.02
 

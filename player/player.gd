@@ -62,7 +62,8 @@ func _process(delta: float) -> void:
 	if suck_effect.is_activated:
 			const BLOOD_PER_SEC = 10
 			metrics.blood += BLOOD_PER_SEC * delta
-			metrics.speed = 100 - 25 * (metrics.blood / 100)
+			metrics.speed = 100 - 50 * (metrics.blood / 100)
+			roll_effect.roll_cooldown_duration = 1.1 + 0.2 * (metrics.blood / 100)
 
 	# update UI
 	blood_bar.value = metrics.blood

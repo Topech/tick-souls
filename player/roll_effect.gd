@@ -7,14 +7,19 @@ extends PlayerEffect
 @export_group("Parameters")
 @export var roll_direction: Vector2
 @export var roll_speed: int = 300
+## Cooldown in seconds
+@export var roll_cooldown_duration: float = 1
 
 
+var cooldown: bool = false
 var locked_roll_direction: Vector2
 @onready var roll_timer = $RollTimer
+@onready var roll_cooldown_timer = $RollCooldownTimer
+
 
 
 func activate():
-	if (not roll_direction.is_zero_approx()):
+	if (not cooldown and not roll_direction.is_zero_approx()):
 		locked_roll_direction = roll_direction.normalized()
 		roll_timer.start()
 		super.activate()
@@ -22,6 +27,7 @@ func activate():
 
 func deactivate():
 	target_rotate_node.rotation = 0
+	_start_cooldown()
 	super.deactivate()
 
 
@@ -37,5 +43,18 @@ func apply(delta: float):
 	target_move_node.move_and_slide()
 
 
+func _start_cooldown() -> void:
+	cooldown = true
+	roll_cooldown_timer.start(roll_cooldown_duration)
+
+
+func _stop_cooldown() -> void:
+	cooldown = false
+
+
 func _on_roll_timer_timeout() -> void:
 	deactivate()
+
+
+func _on_roll_cooldown_timer_timeout() -> void:
+	_stop_cooldown()
