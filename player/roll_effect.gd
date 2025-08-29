@@ -17,13 +17,11 @@ var locked_roll_direction: Vector2
 @onready var roll_cooldown_timer = $RollCooldownTimer
 
 
-
 func activate():
 	if (not cooldown and not roll_direction.is_zero_approx()):
 		locked_roll_direction = roll_direction.normalized()
 		roll_timer.start()
 		super.activate()
-
 
 func deactivate():
 	target_rotate_node.rotation = 0

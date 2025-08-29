@@ -20,6 +20,7 @@ class_name Player extends Node2D
 
 # ui nodes
 @onready var blood_bar = $BloodProgressBar
+@onready var roll_cooldown_bar = $RollCooldownBar
 
 
 func _process(delta: float) -> void:
@@ -64,9 +65,16 @@ func _process(delta: float) -> void:
 			metrics.blood += BLOOD_PER_SEC * delta
 			metrics.speed = 100 - 50 * (metrics.blood / 100)
 			roll_effect.roll_cooldown_duration = 1.1 + 0.2 * (metrics.blood / 100)
-
+			
 	# update UI
 	blood_bar.value = metrics.blood
+	
+	roll_cooldown_bar.value = (
+		100 - (
+			roll_effect.roll_cooldown_timer.time_left \
+		 	/ roll_effect.roll_cooldown_timer.wait_time * 100
+		)
+	)
 
 
 func tweeze():

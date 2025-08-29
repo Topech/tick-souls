@@ -49,6 +49,17 @@ rounded = true
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
+[node name="RollCooldownBar" type="ProgressBar" parent="."]
+self_modulate = Color(0.951949, 0.53861, 0.840238, 1)
+offset_left = -29.0
+offset_top = -37.0
+offset_right = 29.0
+offset_bottom = -31.0
+scale = Vector2(1, 0.480001)
+rounded = true
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
 [node name="WalkEvent" type="Node" parent="."]
 script = ExtResource("8_hg6s5")
 
