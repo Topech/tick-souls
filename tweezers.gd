@@ -44,14 +44,14 @@ func _process(delta: float) -> void:
 		else:
 			failed.emit(self)
 			#queue_free()
-			
 		if $TweezerVisuals.visible:
 			var overlapping_bodies = $PlayerDetector.get_overlapping_bodies()
 			for body in overlapping_bodies:
-				# lets just assume you can only have a player scanned by player hurtbox
-				var player = body.get_player_node()
-				tweezed_player_node = player
-				tweezed_player.emit(player)
+				if is_instance_of(body.owner, Player):
+					var player = body.get_player_node()
+					tweezed_player_node = player
+					tweezed_player.emit(player)
+					break
 	# successful tweeze
 	else:
 		velocity = Vector2(0, -500)
