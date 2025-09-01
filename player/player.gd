@@ -24,6 +24,9 @@ class_name Player extends Node2D
 
 
 func _process(delta: float) -> void:
+	if (Input.is_key_pressed(KEY_P)):
+		queue_free()
+	
 	# sync nodes
 	walk_effect.speed = metrics.speed
 	walk_effect.direction = walk_event.direction

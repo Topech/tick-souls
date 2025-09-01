@@ -55,9 +55,11 @@ func _process(delta: float) -> void:
 	#match (tweezer_state):
 		#tweezer_states.SHADOW_ONLY or tweezer_states.FOLLOWING:
 			#pass
-
-	if target_node.is_queued_for_deletion():
+	
+	if target_node == null or target_node.is_queued_for_deletion():
 		target_node = null
+		# break early
+		return
 
 	if (
 		tweezer_state == tweezer_states.SHADOW_ONLY
