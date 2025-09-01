@@ -18,6 +18,8 @@ func get_all_players() -> Array[Player]:
 
 func choose_random_player() -> Player:
 	var players = get_all_players()
+	if len(players) == 0:
+		return null
 	var player = players[
 		round(randf() * len(players) - 1)
 	]
