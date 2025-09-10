@@ -50,7 +50,7 @@ show_percentage = false
 metadata/_edit_use_anchors_ = true
 
 [node name="RollCooldownBar" type="ProgressBar" parent="."]
-self_modulate = Color(0.951949, 0.53861, 0.840238, 1)
+self_modulate = Color(0.994231, 0.957292, 0.981511, 1)
 offset_left = -29.0
 offset_top = -37.0
 offset_right = 29.0
