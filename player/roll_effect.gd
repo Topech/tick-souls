@@ -1,5 +1,8 @@
 extends PlayerEffect
 
+signal roll_finished
+
+
 @export_group("Target Nodes")
 @export var target_move_node: CharacterBody2D
 @export var target_rotate_node: Node2D
@@ -23,22 +26,23 @@ func activate():
 		roll_timer.start()
 		super.activate()
 
+
 func deactivate():
 	target_rotate_node.rotation = 0
-	_start_cooldown()
 	super.deactivate()
 
 
 func apply(delta: float):
-	var timer_percent_complete = (roll_timer.wait_time - roll_timer.time_left) * 1 / roll_timer.wait_time
-	var new_rotation = timer_percent_complete * 720
-	var is_rolling_right = locked_roll_direction.x > 0
-	if (not is_rolling_right):
-		new_rotation *= -1
-	target_rotate_node.rotation_degrees = new_rotation
+	if not cooldown:
+		var timer_percent_complete = (roll_timer.wait_time - roll_timer.time_left) * 1 / roll_timer.wait_time
+		var new_rotation = timer_percent_complete * 720
+		var is_rolling_right = locked_roll_direction.x > 0
+		if (not is_rolling_right):
+			new_rotation *= -1
+		target_rotate_node.rotation_degrees = new_rotation
 
-	target_move_node.velocity = locked_roll_direction * roll_speed
-	target_move_node.move_and_slide()
+		target_move_node.velocity = locked_roll_direction * roll_speed
+		target_move_node.move_and_slide()
 
 
 func _start_cooldown() -> void:
@@ -51,8 +55,11 @@ func _stop_cooldown() -> void:
 
 
 func _on_roll_timer_timeout() -> void:
-	deactivate()
+	roll_finished.emit()
+	target_rotate_node.rotation = 0
+	_start_cooldown()
 
 
 func _on_roll_cooldown_timer_timeout() -> void:
 	_stop_cooldown()
+	deactivate()
