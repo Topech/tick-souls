@@ -21,7 +21,7 @@ var transitions = {
 	states.IDLE: SpecialStateTransistions.ANY,
 	states.WALKING: SpecialStateTransistions.ANY,
 	states.SUCKING: SpecialStateTransistions.ANY,
-	states.ROLLING: [states.IDLE],
+	states.ROLLING: [states.IDLE, states.WALKING],
 	states.TWEEZED: SpecialStateTransistions.NONE,
 }
 
@@ -122,7 +122,6 @@ func _process(delta: float) -> void:
 		roll_event.clear()
 	elif walk_event.triggered:
 		state = transition(state, states.WALKING)
-		print('a')
 	else:
 		state = transition(state, states.IDLE)
 

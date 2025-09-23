@@ -14,14 +14,14 @@ signal roll_finished
 @export var roll_cooldown_duration: float = 1
 
 
-var cooldown: bool = false
+var is_in_cooldown: bool = false
 var locked_roll_direction: Vector2
 @onready var roll_timer = $RollTimer
 @onready var roll_cooldown_timer = $RollCooldownTimer
 
 
 func activate():
-	if (not cooldown and not roll_direction.is_zero_approx()):
+	if (not is_in_cooldown and not roll_direction.is_zero_approx()):
 		locked_roll_direction = roll_direction.normalized()
 		roll_timer.start()
 		super.activate()
@@ -33,7 +33,7 @@ func deactivate():
 
 
 func apply(delta: float):
-	if not cooldown:
+	if not is_in_cooldown:
 		var timer_percent_complete = (roll_timer.wait_time - roll_timer.time_left) * 1 / roll_timer.wait_time
 		var new_rotation = timer_percent_complete * 720
 		var is_rolling_right = locked_roll_direction.x > 0
@@ -46,12 +46,12 @@ func apply(delta: float):
 
 
 func _start_cooldown() -> void:
-	cooldown = true
+	is_in_cooldown = true
 	roll_cooldown_timer.start(roll_cooldown_duration)
 
 
 func _stop_cooldown() -> void:
-	cooldown = false
+	is_in_cooldown = false
 
 
 func _on_roll_timer_timeout() -> void:

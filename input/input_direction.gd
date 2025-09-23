@@ -47,6 +47,4 @@ func _input(event: InputEvent) -> void:
 	
 
 func _process(_delta: float) -> void:
-	var new_direction = Vector2(0, 0)
-	
 	direction = Vector2(right_strength - left_strength, down_strength - up_strength)
