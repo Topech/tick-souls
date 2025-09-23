@@ -1,5 +1,6 @@
 extends Node2D
 
+signal round_ended
 
 @onready var player_container = $PlayerSpawner/PlayerContainer
 
@@ -23,3 +24,8 @@ func _on_timer_timeout() -> void:
 	add_child(tweezers)
 	tweezers.failed.connect(_on_tweezers_failed)
 	$TweezerSpawnTimer.wait_time = 10
+
+
+func _process(_delta: float) -> void:
+	if len(player_container.get_all_players()) == 0:
+		round_ended.emit()

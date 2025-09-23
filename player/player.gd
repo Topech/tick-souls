@@ -106,7 +106,7 @@ func _process(delta: float) -> void:
 	roll_effect.roll_speed = 3 * metrics.speed
 
 	var old_state: states = state
-	
+
 	# determine next state
 	if tweeze_event.triggered:
 		state = transition(state, states.TWEEZED)
@@ -127,7 +127,7 @@ func _process(delta: float) -> void:
 		# Note: walk_event clears itself
 	else:
 		state = transition(state, states.IDLE)
-		
+
 	# detect when leaving a state
 	if old_state != state:
 		match old_state:
@@ -161,7 +161,7 @@ func _process(delta: float) -> void:
 				suck_effect.activate()
 			walk_effect.enabled = false
 			roll_effect.enabled = false
-			
+
 			const BLOOD_PER_SEC = 10
 			metrics.blood += BLOOD_PER_SEC * delta
 			metrics.speed = 100 - 50 * (metrics.blood / 100)
@@ -174,7 +174,7 @@ func _process(delta: float) -> void:
 
 	# update UI
 	blood_bar.value = metrics.blood
-	
+
 	roll_cooldown_bar.value = (
 		100 - (
 			roll_effect.roll_cooldown_timer.time_left \
