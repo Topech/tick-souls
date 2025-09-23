@@ -28,8 +28,9 @@ grow_vertical = 2
 text = "All ticks collected!"
 
 [node name="ContinueButton" parent="." instance=ExtResource("1_100ng")]
-layout_mode = 0
-anchors_preset = 0
+layout_mode = 1
+offset_top = -90.0
+offset_bottom = -59.0
 
 [node name="P1Label" type="Label" parent="."]
 layout_mode = 0
@@ -40,6 +41,7 @@ offset_bottom = 181.0
 text = "Player 1"
 
 [node name="P2Label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 31.0
 offset_top = 195.0
 offset_right = 93.0
@@ -47,6 +49,7 @@ offset_bottom = 218.0
 text = "Player 2"
 
 [node name="P3Label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 31.0
 offset_top = 232.0
 offset_right = 93.0
@@ -54,6 +57,7 @@ offset_bottom = 255.0
 text = "Player 3"
 
 [node name="P4Label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 34.0
 offset_top = 270.0
 offset_right = 96.0

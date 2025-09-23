@@ -11,10 +11,10 @@ signal continue_pressed
 
 
 func _ready() -> void:
-	p1_label.text[Global.player_names[Global.players.PLAYER_1]]
-	p2_label.text[Global.player_names[Global.players.PLAYER_2]]
-	p3_label.text[Global.player_names[Global.players.PLAYER_3]]
-	p4_label.text[Global.player_names[Global.players.PLAYER_4]]
+	p1_label.text = Global.player_names[Global.players.PLAYER_1]
+	p2_label.text = Global.player_names[Global.players.PLAYER_2]
+	p3_label.text = Global.player_names[Global.players.PLAYER_3]
+	p4_label.text = Global.player_names[Global.players.PLAYER_4]
 
 
 func _on_continue_button_pressed() -> void:
