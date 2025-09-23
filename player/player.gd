@@ -105,16 +105,18 @@ func _process(delta: float) -> void:
 	roll_effect.roll_direction = walk_event.direction
 	roll_effect.roll_speed = 3 * metrics.speed
 
-	var old_state = state
-
+	var old_state: states = state
+	
 	# determine next state
 	if tweeze_event.triggered:
 		state = transition(state, states.TWEEZED)
+		# Note: tweeze_event always ends in player free
 	if roll_effect.is_activated:
+		# pause all state changes if rolling
 		pass
 	elif suck_event.triggered:
 		state = transition(state, states.SUCKING)
-		suck_event.clear()
+		# Note: suck_event clears itself
 	elif roll_event.triggered:
 		# handles cooldown
 		if not roll_effect.is_activated:
@@ -122,9 +124,16 @@ func _process(delta: float) -> void:
 		roll_event.clear()
 	elif walk_event.triggered:
 		state = transition(state, states.WALKING)
+		# Note: walk_event clears itself
 	else:
 		state = transition(state, states.IDLE)
 		
+	# detect when leaving a state
+	if old_state != state:
+		match old_state:
+			states.SUCKING:
+				suck_effect.deactivate()
+
 	# activate state effects
 	match state:
 		states.TWEEZED:
@@ -145,11 +154,6 @@ func _process(delta: float) -> void:
 				roll_effect.activate()
 			suck_effect.enabled = false
 			walk_effect.enabled = false
-			# Don't do anything while rolling
-			# Note: needs to check bc activate isn't guaranteed
-			if roll_effect.is_activated:
-				await roll_effect.roll_finished
-				roll_effect.deactivate()
 
 		states.SUCKING:
 			suck_effect.enabled = true
@@ -157,6 +161,7 @@ func _process(delta: float) -> void:
 				suck_effect.activate()
 			walk_effect.enabled = false
 			roll_effect.enabled = false
+			
 			const BLOOD_PER_SEC = 10
 			metrics.blood += BLOOD_PER_SEC * delta
 			metrics.speed = 100 - 50 * (metrics.blood / 100)

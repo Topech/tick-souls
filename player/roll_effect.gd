@@ -1,7 +1,5 @@
 extends PlayerEffect
 
-signal roll_finished
-
 
 @export_group("Target Nodes")
 @export var target_move_node: CharacterBody2D
@@ -55,11 +53,10 @@ func _stop_cooldown() -> void:
 
 
 func _on_roll_timer_timeout() -> void:
-	roll_finished.emit()
 	target_rotate_node.rotation = 0
 	_start_cooldown()
+	deactivate()
 
 
 func _on_roll_cooldown_timer_timeout() -> void:
 	_stop_cooldown()
-	deactivate()
