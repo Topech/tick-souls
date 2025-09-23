@@ -124,10 +124,7 @@ func _process(delta: float) -> void:
 		state = transition(state, states.WALKING)
 	else:
 		state = transition(state, states.IDLE)
-
-	if state != old_state:
-		print(Time.get_datetime_string_from_system(false, true), " ", old_state, " -> ", state)
-
+		
 	# activate state effects
 	match state:
 		states.TWEEZED:
