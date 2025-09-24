@@ -13,9 +13,20 @@ enum players {
 var all_possible_players = Array(Global.players.values()).filter(func(x): return x != Global.players.NO_PLAYER)
 
 
-var player_names = {
-	players.PLAYER_1: "Big Steve",
-	players.PLAYER_2: "Lil Jimmy",
-	players.PLAYER_3: "Sneaky Sammy",
-	players.PLAYER_4: "Dingus Dirk"
+class PlayerDetails:
+	var score: float = 0
+	var name: String
+
+	func _init(name: String) -> void:
+		self.name = name
+
+
+var player_details_lookup = {
+	players.PLAYER_1: PlayerDetails.new("Big Steve"),
+	players.PLAYER_2: PlayerDetails.new("Lil Jimmy"),
+	players.PLAYER_3: PlayerDetails.new("Sneaky Sammy"),
+	players.PLAYER_4: PlayerDetails.new("Dingus Dirk")
 }
+
+	
+	

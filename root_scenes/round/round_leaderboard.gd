@@ -4,17 +4,35 @@ extends Control
 signal continue_pressed
 
 
-@onready var p1_label = $P1Label
-@onready var p2_label = $P2Label
-@onready var p3_label = $P3Label
-@onready var p4_label = $P4Label
+## in secs
+var round_duration: int
+
+
+@onready var p1_name_label = $P1Label
+@onready var p2_name_label = $P2Label
+@onready var p3_name_label = $P3Label
+@onready var p4_name_label = $P4Label
+
+@onready var p1_score_label = $P1Label/P1ScoreValue
+@onready var p2_score_label = $P2Label/P2ScoreValue
+@onready var p3_score_label = $P3Label/P3ScoreValue
+@onready var p4_score_label = $P4Label/P4ScoreValue
+
+@onready var score_value = $RoundDurationLabel/RoundDurationValue
 
 
 func _ready() -> void:
-	p1_label.text = Global.player_names[Global.players.PLAYER_1]
-	p2_label.text = Global.player_names[Global.players.PLAYER_2]
-	p3_label.text = Global.player_names[Global.players.PLAYER_3]
-	p4_label.text = Global.player_names[Global.players.PLAYER_4]
+	p1_name_label.text = Global.player_details_lookup[Global.players.PLAYER_1].name
+	p2_name_label.text = Global.player_details_lookup[Global.players.PLAYER_2].name
+	p3_name_label.text = Global.player_details_lookup[Global.players.PLAYER_3].name
+	p4_name_label.text = Global.player_details_lookup[Global.players.PLAYER_4].name
+	
+	p1_score_label.text = str(Global.player_details_lookup[Global.players.PLAYER_1].score)
+	p2_score_label.text = str(Global.player_details_lookup[Global.players.PLAYER_2].score)
+	p3_score_label.text = str(Global.player_details_lookup[Global.players.PLAYER_3].score)
+	p4_score_label.text = str(Global.player_details_lookup[Global.players.PLAYER_4].score)
+
+	score_value.text = str(round_duration) + " sec"
 
 
 func _on_continue_button_pressed() -> void:

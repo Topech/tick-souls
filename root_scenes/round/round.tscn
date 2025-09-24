@@ -61,4 +61,8 @@ position = Vector2(110, 348)
 [node name="PlayerSpawn4" type="Marker2D" parent="PlayerSpawner"]
 position = Vector2(658, 358)
 
+[node name="RoundTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="timeout" from="TweezerSpawnTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
