@@ -10,6 +10,20 @@ func get_players_device(player: Global.players) -> PlayerDevice:
 	return _player_device_lookup.get(player, PlayerDevice.create_invalid(player))
 
 
+func clear_player_device(player: Global.players) -> void:
+	var player_device = get_players_device(player)
+
+	if not player_device.is_invalid():
+		_player_device_lookup.erase(player)
+
+		if player_device.is_keyboard:
+			PlayerInputDevices.keyb_assigned_to_player = false
+		else:
+			Global.joy_devices_detected = Global.joy_devices_detected.filter(
+				func(x): return x != player_device.device_id
+			)
+
+
 func set_player_joy_device(player: Global.players, device_id: int) -> void:
 	if player != Global.players.NO_PLAYER:
 		var player_device = PlayerDevice.new(player, device_id)

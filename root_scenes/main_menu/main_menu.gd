@@ -9,7 +9,7 @@ signal start_game
 @onready var p4_label = $PlayerIndicator4/Label
 
 
-func _ready() -> void:
+func _process(_delta: float) -> void:
 	p1_label.text = Global.player_details_lookup[Global.players.PLAYER_1].name + " - Ready?"
 	p2_label.text = Global.player_details_lookup[Global.players.PLAYER_2].name + " - Ready?"
 	p3_label.text = Global.player_details_lookup[Global.players.PLAYER_3].name + " - Ready?"

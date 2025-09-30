@@ -14,3 +14,8 @@ var player_name_options = [
 	"Questing kaylee",
 	"Amblyomma Abby",
 ]
+
+
+func choose_random_name() -> String:
+	var random_index = randf_range(0, len(player_name_options) - 1)
+	return player_name_options[random_index]
