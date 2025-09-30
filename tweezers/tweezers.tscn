@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbl6rol8t55e2"]
+[gd_scene load_steps=7 format=3 uid="uid://dbl6rol8t55e2"]
 
 [ext_resource type="Script" uid="uid://vrmuj5r511pl" path="res://tweezers.gd" id="1_w0b0y"]
 [ext_resource type="Texture2D" uid="uid://6a8j8gtooog3" path="res://assets/tweezer_spritesheet.png" id="2_ewwud"]
+[ext_resource type="AudioStream" uid="uid://co6lupkahkw1q" path="res://assets/sound_effects/tweezers-1.mp3" id="3_ewwud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
 
@@ -20,13 +21,22 @@ script = ExtResource("1_w0b0y")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1bvp3")
 
-[node name="PlayerDetector" type="Area2D" parent="."]
+[node name="TweezePlayerDetector" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TweezePlayerDetector"]
 shape = SubResource("RectangleShape2D_lquwl")
 debug_color = Color(0.986928, 0, 0.318461, 0.42)
+
+[node name="TargetPlayerDetector" type="Area2D" parent="."]
+scale = Vector2(17.32, 17.32)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetPlayerDetector"]
+shape = SubResource("RectangleShape2D_lquwl")
+debug_color = Color(0.888006, 0.107451, 0.753673, 0.42)
 
 [node name="Shadow" type="Node2D" parent="."]
 z_index = 1
@@ -44,3 +54,6 @@ position = Vector2(2, -49)
 scale = Vector2(1.3875, 3.34613)
 texture = SubResource("AtlasTexture_lquwl")
 vframes = 2
+
+[node name="TweezeAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ewwud")

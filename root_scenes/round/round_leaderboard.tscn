@@ -42,8 +42,8 @@ text = "Player 1"
 
 [node name="P1ScoreValue" type="Label" parent="P1Label"]
 layout_mode = 0
-offset_left = 81.0
-offset_right = 121.0
+offset_left = 147.0
+offset_right = 187.0
 offset_bottom = 23.0
 
 [node name="P2Label" type="Label" parent="."]
@@ -55,10 +55,11 @@ offset_bottom = 218.0
 text = "Player 2"
 
 [node name="P2ScoreValue" type="Label" parent="P2Label"]
-offset_left = 75.0
-offset_top = 4.0
-offset_right = 115.0
-offset_bottom = 27.0
+layout_mode = 0
+offset_left = 140.0
+offset_top = 5.0
+offset_right = 180.0
+offset_bottom = 28.0
 
 [node name="P3Label" type="Label" parent="."]
 layout_mode = 0
@@ -69,10 +70,11 @@ offset_bottom = 255.0
 text = "Player 3"
 
 [node name="P3ScoreValue" type="Label" parent="P3Label"]
-offset_left = 78.0
-offset_top = 3.0
-offset_right = 118.0
-offset_bottom = 26.0
+layout_mode = 0
+offset_left = 128.0
+offset_top = 1.0
+offset_right = 168.0
+offset_bottom = 24.0
 
 [node name="P4Label" type="Label" parent="."]
 layout_mode = 0
@@ -83,12 +85,13 @@ offset_bottom = 293.0
 text = "Player 4"
 
 [node name="P4ScoreValue" type="Label" parent="P4Label"]
-offset_left = 78.0
-offset_top = 1.0
-offset_right = 118.0
-offset_bottom = 24.0
+layout_mode = 0
+offset_left = 125.0
+offset_right = 165.0
+offset_bottom = 23.0
 
 [node name="RoundDurationLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 364.0
 offset_top = 132.0
 offset_right = 454.0

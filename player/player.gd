@@ -21,7 +21,7 @@ var transitions = {
 	states.IDLE: SpecialStateTransistions.ANY,
 	states.WALKING: SpecialStateTransistions.ANY,
 	states.SUCKING: SpecialStateTransistions.ANY,
-	states.ROLLING: [states.IDLE, states.WALKING],
+	states.ROLLING: [states.IDLE, states.WALKING, states.SUCKING],
 	states.TWEEZED: SpecialStateTransistions.NONE,
 }
 
@@ -84,6 +84,12 @@ func transition(current: states, next: states) -> states:
 @onready var walk_effect = $WalkEffect
 @onready var suck_effect = $SuckEffect
 
+# audio nodes
+@onready var suck_audio = $SuckAudio
+@onready var squeeze_audio = $SqueezeAudio
+@onready var roll_audio = $RollAudio
+
+
 # ui nodes
 @onready var blood_bar = $BloodProgressBar
 @onready var roll_cooldown_bar = $RollCooldownBar
@@ -133,6 +139,7 @@ func _process(delta: float) -> void:
 		match old_state:
 			states.SUCKING:
 				suck_effect.deactivate()
+				suck_audio.stop()
 
 	# activate state effects
 	match state:
@@ -140,6 +147,10 @@ func _process(delta: float) -> void:
 			walk_effect.enabled = false
 			roll_effect.enabled = false
 			suck_effect.enabled = false
+			
+			if old_state != states.TWEEZED:
+				squeeze_audio.randomise_sound()
+				squeeze_audio.play()
 
 		states.WALKING:
 			walk_effect.enabled = true
@@ -154,6 +165,12 @@ func _process(delta: float) -> void:
 				roll_effect.activate()
 			suck_effect.enabled = false
 			walk_effect.enabled = false
+			
+			# note: must check is_activated again,
+			# not guaranteed on calling activate
+			if roll_effect.is_activated and old_state != states.ROLLING:
+				roll_audio.randomise_sound()
+				roll_audio.play()
 
 		states.SUCKING:
 			suck_effect.enabled = true
@@ -161,6 +178,10 @@ func _process(delta: float) -> void:
 				suck_effect.activate()
 			walk_effect.enabled = false
 			roll_effect.enabled = false
+			
+			if old_state != states.SUCKING:
+				suck_audio.randomise_sound()
+				suck_audio.play()
 
 			const BLOOD_PER_SEC = 10
 			metrics.blood += BLOOD_PER_SEC * delta

@@ -7,6 +7,7 @@ class_name Tweezers extends CharacterBody2D
 
 @onready var shadow = $Shadow
 @onready var tweezer_visuals = $TweezerVisuals
+@onready var tweeze_audio = $TweezeAudio
 
 
 signal tweezed_player
@@ -22,6 +23,8 @@ enum tweezer_states {
 
 
 var tweezed_player_node: Player = null
+var _target_switch_cooldown: bool = false
+var _target_switch_cooldown_duration: float = 2.0
 var _tweezer_completion: float = 0  # between 0 and 1
 
 var tweezer_state = tweezer_states.FOLLOWING
@@ -68,6 +71,9 @@ func _process(delta: float) -> void:
 		velocity = position.direction_to(target_node.position) * tweezer_follow_rate
 		move_and_slide()
 		
+		if not _target_switch_cooldown:
+			check_for_new_target_player()
+		
 		shadow.scale = Vector2(
 			shadow.scale.x - shadow_shrink_rate * delta,
 			shadow.scale.y - shadow_shrink_rate * delta,
@@ -82,16 +88,43 @@ func _process(delta: float) -> void:
 	if tweezer_state == tweezer_states.TWEEZING:
 		velocity = Vector2(0, -500)
 		move_and_slide()
-		tweezed_player_node.position = position
+		if tweezed_player_node != null:
+			tweezed_player_node.position = position
 		$TweezerVisuals.frame = 1
 
 
+func tweeze_player(player):
+	tweezed_player_node = player
+	tweeze_audio.play()
+	tweezed_player.emit(player)
+
+
+func switch_target(player):
+	target_node = player
+	_target_switch_cooldown = true
+	var cooldown_timer = get_tree().create_timer(
+		_target_switch_cooldown_duration
+	)
+	cooldown_timer.timeout.connect(func(): 
+		_target_switch_cooldown = false
+	)
+
+
 func check_for_tweezable_player():
-	var overlapping_bodies = $PlayerDetector.get_overlapping_bodies()
+	var overlapping_bodies = $TweezePlayerDetector.get_overlapping_bodies()
 	for body in overlapping_bodies:
 		if is_instance_of(body.owner, Player):
 			tweezer_state = tweezer_states.TWEEZING
 			var player = body.get_player_node()
-			tweezed_player_node = player
-			tweezed_player.emit(player)
+			tweeze_player(player)
 			break
+
+
+func check_for_new_target_player():
+	var overlapping_bodies = $TargetPlayerDetector.get_overlapping_bodies()
+	for body in overlapping_bodies:
+		if is_instance_of(body.owner, Player):
+			var player = body.get_player_node()
+			if player != target_node:
+				switch_target(player)
+				break

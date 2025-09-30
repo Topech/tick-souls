@@ -18,7 +18,12 @@ func _ready() -> void:
 
 func _on_tweezers_tweezed_player(player: Player) -> void:
 	player.tweeze()
-	player.queue_free()
+
+	#var timer = Timer.new()
+	var timer = get_tree().create_timer(3.0)
+	timer.timeout.connect(func():
+		player.queue_free()
+	)
 	
 	var player_round_score = round_duration + player.metrics.blood
 	Global.player_details_lookup[player.player_id].score += player_round_score

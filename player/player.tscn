@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkr5pvw2bknjq"]
+[gd_scene load_steps=25 format=3 uid="uid://bkr5pvw2bknjq"]
 
 [ext_resource type="Script" uid="uid://btblkgunmjv2b" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="PackedScene" uid="uid://cqydmebpscy8v" path="res://input/input_direction.tscn" id="2_g1dw6"]
@@ -11,6 +11,17 @@
 [ext_resource type="Script" uid="uid://dp3o8bs03t0xc" path="res://player/walk_effect.gd" id="9_hg6s5"]
 [ext_resource type="Script" uid="uid://cnvmughkpjjx7" path="res://player/suck_effect.gd" id="10_8t03j"]
 [ext_resource type="Script" uid="uid://d0onuxcyx8daq" path="res://player/tweeze_effect.gd" id="12_ebec5"]
+[ext_resource type="AudioStream" uid="uid://dbnmk11hxru5b" path="res://assets/sound_effects/sucking-1.mp3" id="12_yllr7"]
+[ext_resource type="AudioStream" uid="uid://dihq3y7yx4ftt" path="res://assets/sound_effects/sucking-2.mp3" id="13_32hag"]
+[ext_resource type="Script" uid="uid://em8w0uk5lckw" path="res://randomise_audio.gd" id="13_kb6p2"]
+[ext_resource type="AudioStream" uid="uid://8cu8ufqmh3iv" path="res://assets/sound_effects/squeeze-1.mp3" id="13_yllr7"]
+[ext_resource type="AudioStream" uid="uid://djqs6mi8sdfd" path="res://assets/sound_effects/sucking-3.mp3" id="15_tqiix"]
+[ext_resource type="AudioStream" uid="uid://crmmk71xv47dg" path="res://assets/sound_effects/sucking-4.mp3" id="16_c35mf"]
+[ext_resource type="AudioStream" uid="uid://0yrcopn1c4yo" path="res://assets/sound_effects/squeeze-2.mp3" id="17_e7oew"]
+[ext_resource type="AudioStream" uid="uid://bujja0wwx8j2k" path="res://assets/sound_effects/squeeze-3.mp3" id="18_c35mf"]
+[ext_resource type="AudioStream" uid="uid://cvlmw1rbhyqg6" path="res://assets/sound_effects/swoosh-1.mp3" id="20_65viv"]
+[ext_resource type="AudioStream" uid="uid://bv5jelxce7j0n" path="res://assets/sound_effects/swoosh-2.mp3" id="21_bjvpn"]
+[ext_resource type="AudioStream" uid="uid://biyj31wf8vl6e" path="res://assets/sound_effects/swoosh-3.mp3" id="22_s7qer"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kqu6x"]
 size = Vector2(13, 14)
@@ -98,6 +109,18 @@ one_shot = true
 
 [node name="TweezeEvent" type="Node" parent="."]
 script = ExtResource("12_ebec5")
+
+[node name="SuckAudio" type="AudioStreamPlayer" parent="."]
+script = ExtResource("13_kb6p2")
+resources = Array[AudioStream]([ExtResource("12_yllr7"), ExtResource("13_32hag"), ExtResource("15_tqiix"), ExtResource("16_c35mf")])
+
+[node name="SqueezeAudio" type="AudioStreamPlayer" parent="."]
+script = ExtResource("13_kb6p2")
+resources = Array[AudioStream]([ExtResource("13_yllr7"), ExtResource("17_e7oew"), ExtResource("18_c35mf")])
+
+[node name="RollAudio" type="AudioStreamPlayer" parent="."]
+script = ExtResource("13_kb6p2")
+resources = Array[AudioStream]([ExtResource("20_65viv"), ExtResource("21_bjvpn"), ExtResource("22_s7qer")])
 
 [connection signal="timeout" from="RollEffect/RollTimer" to="RollEffect" method="_on_roll_timer_timeout"]
 [connection signal="timeout" from="RollEffect/RollCooldownTimer" to="RollEffect" method="_on_roll_cooldown_timer_timeout"]
