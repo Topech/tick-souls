@@ -32,7 +32,6 @@ var tweezer_state = tweezer_states.FOLLOWING
 
 func _ready() -> void:
 	tweezer_visuals.visible = false
-	position = target_node.position
 
 
 func _process(delta: float) -> void:

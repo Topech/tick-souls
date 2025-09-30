@@ -36,10 +36,18 @@ func _on_tweezers_failed(tweezer: Tweezers) -> void:
 func _on_timer_timeout() -> void:
 	var tweezers = preload("res://tweezers/tweezers.tscn").instantiate()
 	tweezers.target_node = player_container.choose_random_player()
+	
+	var screen_size = get_viewport().get_visible_rect().size
+	tweezers.position = Vector2(
+		screen_size.x * randf(),
+		screen_size.y * randf(),
+	)
+	
 	add_child(tweezers)
 	tweezers.tweezed_player.connect((_on_tweezers_tweezed_player))
 	tweezers.failed.connect(_on_tweezers_failed)
-	$TweezerSpawnTimer.wait_time = 10
+	var new_wait_time = max(3, 10 - 7.0 * (float(round_duration) / 120.0))
+	$TweezerSpawnTimer.wait_time = new_wait_time
 
 
 func _process(_delta: float) -> void:
