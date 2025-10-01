@@ -79,7 +79,6 @@ func _process(delta: float) -> void:
 		)
 	if tweezer_state == tweezer_states.FOLLOWING:
 		$TweezerVisuals.visible = true
-		$TweezerVisuals.modulate.a += 0.2 * delta
 		check_for_tweezable_player()
 	if tweezer_state == tweezer_states.FAILED:
 		failed.emit(self)
