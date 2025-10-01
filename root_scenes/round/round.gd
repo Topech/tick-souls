@@ -21,7 +21,7 @@ func _ready() -> void:
 		$LizardSkinColor,
 	]
 
-	var chosen_bg_ii: int = round((len(backgrounds) - 1) * randf())
+	var chosen_bg_ii: int = randi_range(0, len(backgrounds) -1)
 	for ii in range(len(backgrounds)):
 		var background = backgrounds[ii]
 		background.visible = bool(ii == chosen_bg_ii)
