@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqef7kj40c3xm"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ig7tw"]
+
+[node name="LizardSkinColor" type="TextureRect"]
+modulate = Color(0.626238, 0.651553, 0.540866, 1)
+offset_right = 847.0
+offset_bottom = 481.0
+texture = SubResource("CanvasTexture_ig7tw")

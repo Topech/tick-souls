@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://ll1pmd436rgx"]
+[gd_scene load_steps=9 format=3 uid="uid://ll1pmd436rgx"]
 
 [ext_resource type="Script" uid="uid://c3s7xjasqsoxb" path="res://root_scenes/round/round.gd" id="1_v6yer"]
 [ext_resource type="Script" uid="uid://7vw62jfhqglr" path="res://root_scenes/round/player_spawner.gd" id="2_j0dvr"]
+[ext_resource type="PackedScene" uid="uid://bifayyhudopdi" path="res://root_scenes/round/backgrounds/crap_skin_color_2.tscn" id="2_k4tbe"]
+[ext_resource type="PackedScene" uid="uid://djaye3edy1wd5" path="res://root_scenes/round/backgrounds/crap_skin_color.tscn" id="2_on8o6"]
+[ext_resource type="PackedScene" uid="uid://cqef7kj40c3xm" path="res://root_scenes/round/backgrounds/lizard_skin_color.tscn" id="3_on8o6"]
 [ext_resource type="Script" uid="uid://pse7mut484yx" path="res://root_scenes/round/player_container.gd" id="3_y8in6"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_ig7tw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(20, 480)
@@ -15,11 +16,13 @@ size = Vector2(885, 20)
 [node name="Round" type="Node2D"]
 script = ExtResource("1_v6yer")
 
-[node name="CrapSkinColour" type="TextureRect" parent="."]
-modulate = Color(0.988033, 0.746327, 0.584283, 1)
-offset_right = 847.0
-offset_bottom = 481.0
-texture = SubResource("CanvasTexture_ig7tw")
+[node name="CrapSkinColor" parent="." instance=ExtResource("2_on8o6")]
+
+[node name="CrapSkinColor2" parent="." instance=ExtResource("2_k4tbe")]
+visible = false
+
+[node name="LizardSkinColor" parent="." instance=ExtResource("3_on8o6")]
+visible = false
 
 [node name="Wall" type="StaticBody2D" parent="."]
 

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bifayyhudopdi"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ig7tw"]
+
+[node name="CrapSkinColor2" type="TextureRect"]
+modulate = Color(0.930586, 0.763372, 0.698369, 1)
+offset_right = 847.0
+offset_bottom = 481.0
+texture = SubResource("CanvasTexture_ig7tw")

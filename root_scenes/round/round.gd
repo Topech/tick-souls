@@ -15,6 +15,17 @@ func _ready() -> void:
 	$TweezerSpawnTimer.wait_time = 5
 	$TweezerSpawnTimer.start()
 
+	var backgrounds = [
+		$CrapSkinColor,
+		$CrapSkinColor2,
+		$LizardSkinColor,
+	]
+
+	var chosen_bg_ii: int = round((len(backgrounds) - 1) * randf())
+	for ii in range(len(backgrounds)):
+		var background = backgrounds[ii]
+		background.visible = bool(ii == chosen_bg_ii)
+
 
 func _on_tweezers_tweezed_player(player: Player) -> void:
 	player.tweeze()
