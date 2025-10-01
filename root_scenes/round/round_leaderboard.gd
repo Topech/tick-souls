@@ -8,15 +8,15 @@ signal continue_pressed
 var round_duration: int
 
 
-@onready var p1_name_label = $P1Label
-@onready var p2_name_label = $P2Label
-@onready var p3_name_label = $P3Label
-@onready var p4_name_label = $P4Label
+@onready var p1_name_label = $LabelList/P1Label/NameLabel
+@onready var p2_name_label = $LabelList/P2Label/NameLabel
+@onready var p3_name_label = $LabelList/P3Label/NameLabel
+@onready var p4_name_label = $LabelList/P4Label/NameLabel
 
-@onready var p1_score_label = $P1Label/P1ScoreValue
-@onready var p2_score_label = $P2Label/P2ScoreValue
-@onready var p3_score_label = $P3Label/P3ScoreValue
-@onready var p4_score_label = $P4Label/P4ScoreValue
+@onready var p1_score_label = $LabelList/P1Label/ScoreLabel
+@onready var p2_score_label = $LabelList/P2Label/ScoreLabel
+@onready var p3_score_label = $LabelList/P3Label/ScoreLabel
+@onready var p4_score_label = $LabelList/P4Label/ScoreLabel
 
 @onready var score_value = $RoundDurationLabel/RoundDurationValue
 

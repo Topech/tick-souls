@@ -42,63 +42,57 @@ layout_mode = 1
 offset_top = -90.0
 offset_bottom = -59.0
 
-[node name="P1Label" type="Label" parent="."]
+[node name="LabelList" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 31.0
-offset_top = 158.0
-offset_right = 71.0
-offset_bottom = 181.0
+offset_left = 26.0
+offset_top = 157.0
+offset_right = 93.0
+offset_bottom = 197.0
+
+[node name="P1Label" type="HBoxContainer" parent="LabelList"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="LabelList/P1Label"]
+layout_mode = 2
 text = "Player 1"
 
-[node name="P1ScoreValue" type="Label" parent="P1Label"]
-layout_mode = 0
-offset_left = 147.0
-offset_right = 187.0
-offset_bottom = 23.0
+[node name="ScoreLabel" type="Label" parent="LabelList/P1Label"]
+layout_mode = 2
+text = "0.0"
 
-[node name="P2Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 31.0
-offset_top = 195.0
-offset_right = 93.0
-offset_bottom = 218.0
+[node name="P2Label" type="HBoxContainer" parent="LabelList"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="LabelList/P2Label"]
+layout_mode = 2
 text = "Player 2"
 
-[node name="P2ScoreValue" type="Label" parent="P2Label"]
-layout_mode = 0
-offset_left = 140.0
-offset_top = 5.0
-offset_right = 180.0
-offset_bottom = 28.0
+[node name="ScoreLabel" type="Label" parent="LabelList/P2Label"]
+layout_mode = 2
+text = "0.0"
 
-[node name="P3Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 31.0
-offset_top = 232.0
-offset_right = 93.0
-offset_bottom = 255.0
+[node name="P3Label" type="HBoxContainer" parent="LabelList"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="LabelList/P3Label"]
+layout_mode = 2
 text = "Player 3"
 
-[node name="P3ScoreValue" type="Label" parent="P3Label"]
-layout_mode = 0
-offset_left = 128.0
-offset_top = 1.0
-offset_right = 168.0
-offset_bottom = 24.0
+[node name="ScoreLabel" type="Label" parent="LabelList/P3Label"]
+layout_mode = 2
+text = "0.0"
 
-[node name="P4Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 34.0
-offset_top = 270.0
-offset_right = 96.0
-offset_bottom = 293.0
+[node name="P4Label" type="HBoxContainer" parent="LabelList"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="LabelList/P4Label"]
+layout_mode = 2
 text = "Player 4"
 
-[node name="P4ScoreValue" type="Label" parent="P4Label"]
-layout_mode = 0
-offset_left = 125.0
-offset_right = 165.0
-offset_bottom = 23.0
+[node name="ScoreLabel" type="Label" parent="LabelList/P4Label"]
+layout_mode = 2
+text = "0.0"
 
 [node name="RoundDurationLabel" type="Label" parent="."]
 layout_mode = 0
