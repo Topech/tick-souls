@@ -3,19 +3,25 @@ extends ColorRect
 
 @export var player_id := Global.players.NO_PLAYER
 
+@onready var wiggle_sprite = $WiggleSprite
+
+
 var disabled_color := Color.hex(0x707070)
 
 
 func _ready():
 	color = disabled_color
+	wiggle_sprite.visible = false
 
 
 func _process(delta: float) -> void:
 	var player_device = PlayerInputDevices.get_players_device(player_id)
 	if not player_device.is_invalid():
 		color = Color.GREEN
+		wiggle_sprite.visible = true
 	else:
 		color = disabled_color
+		wiggle_sprite.visible = false
 
 
 func _input(event: InputEvent) -> void:

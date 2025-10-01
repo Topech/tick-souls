@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8nfxa5msculm"]
+[gd_scene load_steps=6 format=3 uid="uid://c8nfxa5msculm"]
 
 [ext_resource type="Script" uid="uid://bqle7g5rho6gu" path="res://root_scenes/main_menu/main_menu.gd" id="1_56bkm"]
 [ext_resource type="Script" uid="uid://bngwc846ablmb" path="res://controller_detector.gd" id="2_u4xch"]
 [ext_resource type="Script" uid="uid://c4f1sl3w8m73c" path="res://root_scenes/main_menu/player_indicator.gd" id="3_sy3t8"]
+[ext_resource type="Texture2D" uid="uid://b8ixsh1x6qjjl" path="res://assets/Kanagroo Tick-1.png" id="4_4fyue"]
+[ext_resource type="Script" uid="uid://ds4e7ko2hd4i6" path="res://root_scenes/main_menu/sprite_wiggle.gd" id="5_i216j"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -49,6 +51,12 @@ offset_right = 108.0
 offset_bottom = 32.0
 text = "Player 1"
 
+[node name="WiggleSprite" type="Sprite2D" parent="PlayerIndicator1"]
+position = Vector2(20.32, 22.32)
+scale = Vector2(0.5675, 0.5675)
+texture = ExtResource("4_4fyue")
+script = ExtResource("5_i216j")
+
 [node name="PlayerIndicator2" type="ColorRect" parent="."]
 layout_mode = 0
 offset_left = 52.0
@@ -66,6 +74,12 @@ offset_top = 9.0
 offset_right = 108.0
 offset_bottom = 32.0
 text = "Player 2"
+
+[node name="WiggleSprite" type="Sprite2D" parent="PlayerIndicator2"]
+position = Vector2(20.32, 22.32)
+scale = Vector2(0.5675, 0.5675)
+texture = ExtResource("4_4fyue")
+script = ExtResource("5_i216j")
 
 [node name="PlayerIndicator3" type="ColorRect" parent="."]
 layout_mode = 0
@@ -85,6 +99,12 @@ offset_right = 108.0
 offset_bottom = 32.0
 text = "Player 3"
 
+[node name="WiggleSprite" type="Sprite2D" parent="PlayerIndicator3"]
+position = Vector2(20.32, 22.32)
+scale = Vector2(0.5675, 0.5675)
+texture = ExtResource("4_4fyue")
+script = ExtResource("5_i216j")
+
 [node name="PlayerIndicator4" type="ColorRect" parent="."]
 layout_mode = 0
 offset_left = 52.0
@@ -102,5 +122,11 @@ offset_top = 9.0
 offset_right = 108.0
 offset_bottom = 32.0
 text = "Player 4"
+
+[node name="WiggleSprite" type="Sprite2D" parent="PlayerIndicator4"]
+position = Vector2(20.32, 22.32)
+scale = Vector2(0.5675, 0.5675)
+texture = ExtResource("4_4fyue")
+script = ExtResource("5_i216j")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
