@@ -16,6 +16,11 @@ func _ready() -> void:
 	current_timer = _create_timer()
 
 
+func _exit_tree() -> void:
+	# stops trying to create timers
+	current_timer.timeout.disconnect(_on_timer_timeout)
+
+
 func _create_timer():
 	var new_timer = get_tree().create_timer(timer_duration)
 	new_timer.timeout.connect(_on_timer_timeout)
