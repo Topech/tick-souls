@@ -1,6 +1,7 @@
 extends Control
 
 signal start_game
+signal start_boss
 
 
 @onready var p1_label = $PlayerIndicator1/Label
@@ -19,3 +20,8 @@ func _process(_delta: float) -> void:
 func _on_button_pressed() -> void:
 	if len(PlayerInputDevices.get_all_players()) > 0:
 		start_game.emit()
+
+
+func _on_boss_button_pressed() -> void:
+	if len(PlayerInputDevices.get_all_players()) > 0:
+		start_boss.emit()

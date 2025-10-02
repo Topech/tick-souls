@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2s3gnbn1u8ee"]
+
+[ext_resource type="PackedScene" uid="uid://y4u7prqsp0xc" path="res://boss/boss.tscn" id="1_2m0ip"]
+[ext_resource type="Script" uid="uid://7vw62jfhqglr" path="res://root_scenes/round/player_spawner.gd" id="2_tj4qp"]
+[ext_resource type="Script" uid="uid://pse7mut484yx" path="res://root_scenes/round/player_container.gd" id="3_x50sn"]
+
+[node name="BossRound" type="Node2D"]
+
+[node name="Boss" parent="." instance=ExtResource("1_2m0ip")]
+position = Vector2(403, 223)
+
+[node name="PlayerSpawner" type="Node" parent="."]
+script = ExtResource("2_tj4qp")
+
+[node name="PlayerContainer" type="Node" parent="PlayerSpawner"]
+script = ExtResource("3_x50sn")
+
+[node name="PlayerSpawn1" type="Marker2D" parent="PlayerSpawner"]
+position = Vector2(168, 97)
+
+[node name="PlayerSpawn2" type="Marker2D" parent="PlayerSpawner"]
+position = Vector2(606, 100)
+
+[node name="PlayerSpawn3" type="Marker2D" parent="PlayerSpawner"]
+position = Vector2(190, 358)
+
+[node name="PlayerSpawn4" type="Marker2D" parent="PlayerSpawner"]
+position = Vector2(617, 380)

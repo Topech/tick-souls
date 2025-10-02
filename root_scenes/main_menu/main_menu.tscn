@@ -18,6 +18,14 @@ script = ExtResource("1_56bkm")
 [node name="ControllerDetector" type="Node" parent="."]
 script = ExtResource("2_u4xch")
 
+[node name="BossButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 398.0
+offset_top = 414.0
+offset_right = 452.0
+offset_bottom = 445.0
+text = "BOSS!"
+
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -129,4 +137,5 @@ scale = Vector2(0.5675, 0.5675)
 texture = ExtResource("4_4fyue")
 script = ExtResource("5_i216j")
 
+[connection signal="pressed" from="BossButton" to="." method="_on_boss_button_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

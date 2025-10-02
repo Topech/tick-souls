@@ -3,6 +3,7 @@ extends Node
 
 @onready var main_menu = $MainMenu
 var round: Node
+var boss_round: Node
 var round_leaderboard: Node
 
 
@@ -12,6 +13,17 @@ func _on_main_menu_start_game() -> void:
 	add_child(round)
 	remove_child(main_menu)
 	main_menu = null
+
+
+func _on_main_menu_start_boss() -> void:
+	boss_round = preload("res://root_scenes/boss_round/boss_round.tscn").instantiate()
+	add_child(boss_round)
+	if main_menu != null:
+		remove_child(main_menu)
+		main_menu = null
+	elif round_leaderboard != null:
+		remove_child(round_leaderboard)
+		round_leaderboard = null
 
 
 func _on_leaderboard_continue() -> void:
