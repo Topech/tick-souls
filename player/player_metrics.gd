@@ -1,4 +1,4 @@
-class_name PlayerMetrics extends Node
+class_name PlayerMetrics extends Resource
 
 
 var health: int

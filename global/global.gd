@@ -28,5 +28,8 @@ var player_details_lookup = {
 	players.PLAYER_4: PlayerDetails.new("Dingus Dirk")
 }
 
-	
-	
+
+enum SuckStrategyType {
+	STANDARD,
+	BOSS,
+}

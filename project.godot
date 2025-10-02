@@ -86,6 +86,7 @@ ability_suck_blood={
 
 2d_physics/layer_1="Player Movement"
 2d_physics/layer_2="Player Hurtbox"
+2d_physics/layer_3="BossHurtBox"
 
 [rendering]
 

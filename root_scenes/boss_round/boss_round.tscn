@@ -11,6 +11,7 @@ position = Vector2(403, 223)
 
 [node name="PlayerSpawner" type="Node" parent="."]
 script = ExtResource("2_tj4qp")
+is_boss_round = true
 
 [node name="PlayerContainer" type="Node" parent="PlayerSpawner"]
 script = ExtResource("3_x50sn")

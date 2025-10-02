@@ -66,6 +66,9 @@ func transition(current: states, next: states) -> states:
 	return next
 
 
+@export var suck_strategy_type = Global.SuckStrategyType.STANDARD
+@onready var suck_ray = $SuckRay
+
 # contoller support
 @export var player_id := Global.players.NO_PLAYER
 @onready var player_device: PlayerDevice = PlayerInputDevices.get_players_device(player_id)
@@ -73,6 +76,7 @@ func transition(current: states, next: states) -> states:
 # data structures
 @onready var state = states.IDLE
 @onready var metrics = PlayerMetrics.new()
+var suck_strategy: PlayerSuckStrategy
 
 # control nodes
 @onready var walk_event = $WalkEvent
@@ -89,7 +93,6 @@ func transition(current: states, next: states) -> states:
 @onready var squeeze_audio = $SqueezeAudio
 @onready var roll_audio = $RollAudio
 
-
 # ui nodes
 @onready var blood_bar = $BloodProgressBar
 @onready var roll_cooldown_bar = $RollCooldownBar
@@ -98,6 +101,13 @@ func transition(current: states, next: states) -> states:
 func _ready() -> void:
 	if validate_state_machine(states, transitions) != OK:
 		push_error("state machine is invalid")
+	
+	if suck_strategy_type == Global.SuckStrategyType.STANDARD:
+		suck_strategy = PlayerSuckStrategyStandard.new(metrics)
+	elif suck_strategy_type == Global.SuckStrategyType.BOSS:
+		suck_strategy = PlayerSuckStrategyBoss.new(metrics, suck_ray)
+	else:
+		push_error("invalid suck_strategy_type")
 
 
 func _process(delta: float) -> void:
@@ -178,14 +188,12 @@ func _process(delta: float) -> void:
 				suck_effect.activate()
 			walk_effect.enabled = false
 			roll_effect.enabled = false
-			
+
 			if old_state != states.SUCKING:
 				suck_audio.randomise_sound()
 				suck_audio.play()
-
-			const BLOOD_PER_SEC = 10
-			metrics.blood += BLOOD_PER_SEC * delta
-			metrics.speed = 100 - 50 * (metrics.blood / 100)
+			
+			suck_strategy.suck(delta)
 			roll_effect.roll_cooldown_duration = 1.1 + 0.2 * (metrics.blood / 100)
 
 		states.IDLE, _:
