@@ -124,6 +124,7 @@ vframes = 2
 frame = 1
 
 [node name="TweezerSprite" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(615.93, 229.25)
 rotation = -0.272879
 scale = Vector2(2, 3.96875)
@@ -131,6 +132,7 @@ texture = SubResource("AtlasTexture_o5cg6")
 vframes = 2
 
 [node name="TickSprite" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(629.93, 287.25)
 rotation = 0.335486
 scale = Vector2(0.570312, 0.570312)
