@@ -33,7 +33,13 @@ func is_invalid():
 
 
 func check_owns_input(event: InputEvent):
-	if not is_keyboard and event is InputEventJoypadButton:
+	if (
+		not is_keyboard 
+		and (
+			event is InputEventJoypadButton
+			or event is InputEventJoypadMotion
+		)
+	):
 		return event.device == device_id
 	
 	elif is_keyboard and event is InputEventKey:

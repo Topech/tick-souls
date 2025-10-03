@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cqef7kj40c3xm" path="res://root_scenes/round/backgrounds/lizard_skin_color.tscn" id="3_on8o6"]
 [ext_resource type="Script" uid="uid://pse7mut484yx" path="res://root_scenes/round/player_container.gd" id="3_y8in6"]
 [ext_resource type="PackedScene" uid="uid://ixo1qhmijyhj" path="res://player/player_score_label.tscn" id="7_bxfx3"]
-[ext_resource type="Script" path="res://root_scenes/round/barrier_spawner.gd" id="8_siu77"]
-[ext_resource type="Script" path="res://root_scenes/round/barrier_container.gd" id="9_efv08"]
+[ext_resource type="Script" uid="uid://y35pcjkdfkk1" path="res://root_scenes/round/barrier_spawner.gd" id="8_siu77"]
+[ext_resource type="Script" uid="uid://daq7b4e7y0wc5" path="res://root_scenes/round/barrier_container.gd" id="9_efv08"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(20, 480)

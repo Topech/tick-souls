@@ -1,7 +1,7 @@
 extends Node
 
 
-var device_id: int
+var player_device: PlayerDevice
 
 
 @export_group("Movement Actions")
@@ -21,7 +21,7 @@ var right_strength: float = 0
 
 
 func _input(event: InputEvent) -> void:
-	if event.device != device_id:
+	if not player_device.check_owns_input(event):
 		return
 	
 	match event:

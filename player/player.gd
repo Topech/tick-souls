@@ -104,8 +104,6 @@ var suck_strategy: PlayerSuckStrategy
 @onready var roll_cooldown_bar = $RollCooldownBar
 
 # collision and sprite nodes
-@onready var sprite: Sprite2D = $VisualBody2d/Sprite2D
-@onready var collision_shape: CollisionShape2D = $VisualBody2d/VisualCollision2D
 @onready var visual_body: StaticBody2D = $VisualBody2d
 
 
