@@ -8,8 +8,10 @@ var round_duration: int = 0
 
 
 func _ready() -> void:
-	$TweezerSpawnTimer.wait_time = 10
+	# spawn first one early
+	$TweezerSpawnTimer.wait_time = 1
 	$TweezerSpawnTimer.start()
+	$TweezerSpawnTimer.wait_time = 10
 
 
 func _on_tweezers_tweezed_player(player: Player) -> void:

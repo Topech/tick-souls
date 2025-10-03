@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://y4u7prqsp0xc"]
+[gd_scene load_steps=6 format=3 uid="uid://y4u7prqsp0xc"]
 
 [ext_resource type="Texture2D" uid="uid://cmxu2vbip0up3" path="res://assets/XavFace_spritesheet.png" id="1_b105h"]
+[ext_resource type="Script" uid="uid://dcjb6jp1j44p4" path="res://boss/boss.gd" id="1_nnfxe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nnfxe"]
 atlas = ExtResource("1_b105h")
@@ -14,6 +15,7 @@ radius = 80.0
 height = 196.0
 
 [node name="Boss" type="Node2D"]
+script = ExtResource("1_nnfxe")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -28,10 +30,20 @@ vframes = 2
 shape = SubResource("CapsuleShape2D_yy71b")
 
 [node name="PlayerSuckingBox" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 4
+collision_layer = 5
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSuckingBox"]
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_b105h")
 debug_color = Color(0.886728, 0.30003, 0.365051, 0.42)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+modulate = Color(0.770763, 0.312755, 0.289739, 1)
+offset_left = -326.0
+offset_top = -211.0
+offset_right = -19.0
+offset_bottom = -188.0
+scale = Vector2(2.12, 1)
+value = 100.0
+show_percentage = false
