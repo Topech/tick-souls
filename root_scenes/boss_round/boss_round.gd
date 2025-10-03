@@ -21,7 +21,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if len(player_container.get_all_players()) == 0:
 		round_ended.emit(false)
-	elif $Boss.health_bar.value <= 0:
+	
+	
+func _on_boss_died():
 		round_ended.emit(true)
 
 

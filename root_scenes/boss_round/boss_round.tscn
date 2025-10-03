@@ -95,5 +95,6 @@ offset_right = -639.0
 offset_bottom = 471.0
 player_id = 4
 
+[connection signal="died" from="Boss" to="." method="_on_boss_died"]
 [connection signal="timeout" from="TweezerSpawnTimer" to="." method="_on_tweezer_spawn_timer_timeout"]
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
