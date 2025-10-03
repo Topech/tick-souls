@@ -4,7 +4,7 @@ extends Node2D
 signal round_ended
 
 
-@onready var player_container = $PlayerSpawner/PlayerContainer
+@onready var player_container: PlayerContainer = $PlayerSpawner/PlayerContainer
 
 
 ## in secs
@@ -27,17 +27,22 @@ func _ready() -> void:
 		background.visible = bool(ii == chosen_bg_ii)
 
 
+func _process(delta: float) -> void:
+	calc_players_points(delta)
+
+	if len(player_container.get_all_players()) == 0:
+		round_ended.emit(round_duration)
+
+
 func _on_tweezers_tweezed_player(player: Player) -> void:
 	player.tweeze()
 
-	#var timer = Timer.new()
+	# give time to delete player so it can go off screen
 	var timer = get_tree().create_timer(3.0)
 	timer.timeout.connect(func():
 		player.queue_free()
 	)
 	
-	var player_round_score = round_duration + player.metrics.blood
-	Global.player_details_lookup[player.player_id].score += player_round_score
 
 
 func _on_tweezers_failed(tweezer: Tweezers) -> void:
@@ -67,10 +72,18 @@ func _on_timer_timeout() -> void:
 	$TweezerSpawnTimer.wait_time = new_wait_time
 
 
-func _process(_delta: float) -> void:
-	if len(player_container.get_all_players()) == 0:
-		round_ended.emit(round_duration)
-
-
 func _on_round_timer_timeout() -> void:
 	round_duration += 1
+
+
+func calc_players_points(delta: float) -> void:
+	for player in player_container.get_all_players():
+		if player.state == player.states.TWEEZED:
+			continue
+
+		var player_id = player.player_id
+		var player_details = Global.player_details_lookup[player_id]
+		# get points for existing
+		player_details.score += delta
+		# get points for blood
+		player_details.score += player.metrics.blood * delta

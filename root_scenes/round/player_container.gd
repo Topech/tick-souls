@@ -1,4 +1,4 @@
-extends Node
+class_name PlayerContainer extends Node
 
 
 func get_player_by_id(player_id: Global.players) -> Variant:

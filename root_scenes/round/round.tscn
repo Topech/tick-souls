@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ll1pmd436rgx"]
+[gd_scene load_steps=10 format=3 uid="uid://ll1pmd436rgx"]
 
 [ext_resource type="Script" uid="uid://c3s7xjasqsoxb" path="res://root_scenes/round/round.gd" id="1_v6yer"]
 [ext_resource type="Script" uid="uid://7vw62jfhqglr" path="res://root_scenes/round/player_spawner.gd" id="2_j0dvr"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://djaye3edy1wd5" path="res://root_scenes/round/backgrounds/crap_skin_color.tscn" id="2_on8o6"]
 [ext_resource type="PackedScene" uid="uid://cqef7kj40c3xm" path="res://root_scenes/round/backgrounds/lizard_skin_color.tscn" id="3_on8o6"]
 [ext_resource type="Script" uid="uid://pse7mut484yx" path="res://root_scenes/round/player_container.gd" id="3_y8in6"]
+[ext_resource type="PackedScene" uid="uid://ixo1qhmijyhj" path="res://player/player_score_label.tscn" id="7_bxfx3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(20, 480)
@@ -66,6 +67,30 @@ position = Vector2(658, 358)
 
 [node name="RoundTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="PlayerScoreLabel1" parent="." instance=ExtResource("7_bxfx3")]
+player_id = 1
+
+[node name="PlayerScoreLabel2" parent="." instance=ExtResource("7_bxfx3")]
+layout_direction = 3
+offset_left = -841.0
+offset_right = -641.0
+offset_bottom = 23.0
+player_id = 2
+
+[node name="PlayerScoreLabel3" parent="." instance=ExtResource("7_bxfx3")]
+offset_top = 452.0
+offset_right = 200.0
+offset_bottom = 475.0
+player_id = 3
+
+[node name="PlayerScoreLabel4" parent="." instance=ExtResource("7_bxfx3")]
+layout_direction = 3
+offset_left = -839.0
+offset_top = 448.0
+offset_right = -639.0
+offset_bottom = 471.0
+player_id = 4
 
 [connection signal="timeout" from="TweezerSpawnTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]

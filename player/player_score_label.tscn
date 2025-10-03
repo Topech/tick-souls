@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://ixo1qhmijyhj"]
+
+[ext_resource type="Script" uid="uid://b8w22vvu3oy8u" path="res://player/player_score_label.gd" id="1_32qyg"]
+
+[node name="PlayerScoreLabel" type="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+theme_override_constants/separation = 25
+script = ExtResource("1_32qyg")
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Player Name"
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 2
+text = "0.0"
