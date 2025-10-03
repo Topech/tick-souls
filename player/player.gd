@@ -134,7 +134,6 @@ func _process(delta: float) -> void:
 	roll_effect.roll_speed = 1.5 * metrics.base_speed + 2 * metrics.blood
 	roll_effect.roll_cooldown_duration = 1.0 + 1.0 * (metrics.blood / 100)
 
-
 	var old_state: states = state
 
 	# determine next state
@@ -227,15 +226,16 @@ func _process(delta: float) -> void:
 
 func tweeze():
 	tweeze_event.trigger()
-	
+
+
 func play_tweezed_audio():
 	squeeze_audio.randomise_sound()
 	squeeze_audio.play()
 	tweeze_scream_audio.randomise_sound()
 	tweeze_scream_audio.play()
 
+
 func update_tick_size():
 	var blood_ratio = metrics.blood / 100.0  # assuming blood is 0-100
 	var new_scale = TICK_SIZE_MIN_SCALE.lerp(TICK_SIZE_MAX_SCALE, blood_ratio)
 	visual_body.scale = new_scale
-	

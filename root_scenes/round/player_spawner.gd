@@ -15,7 +15,11 @@ extends Node
 
 
 func _ready() -> void:
-	for player_id in PlayerInputDevices.get_all_players():
+	spawn_players(PlayerInputDevices.get_all_players())
+
+
+func spawn_players(player_ids: Array):
+	for player_id in player_ids:
 		var player = preload("res://player/player.tscn").instantiate()
 		player.player_id = player_id
 		player.global_position = player_spawn_location[player_id].global_position

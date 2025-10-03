@@ -10,7 +10,12 @@ enum players {
 	PLAYER_4
 }
 
-var all_possible_players = Array(players.values()).filter(func(x): return x != players.NO_PLAYER)
+var all_possible_players = (
+	Array(
+		players.values()
+	).filter(func(x): return x != players.NO_PLAYER)
+	as Array[players]
+)
 
 
 class PlayerDetails:

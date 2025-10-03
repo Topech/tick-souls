@@ -1,7 +1,7 @@
 extends Node
 
 
-var _player_device_lookup = {}
+var _player_device_lookup: Dictionary[Global.players, PlayerDevice] = {}
 
 var keyb_assigned_to_player: bool = false
 
@@ -36,7 +36,7 @@ func set_player_keyb_device(player: Global.players) -> void:
 		_player_device_lookup.set(player, player_device)
 
 
-func get_all_players() -> Array:
+func get_all_players() -> Array[Global.players]:
 	var all_players = _player_device_lookup.keys()
 	return all_players
 

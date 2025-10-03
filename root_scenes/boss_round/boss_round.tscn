@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://7vw62jfhqglr" path="res://root_scenes/round/player_spawner.gd" id="2_tj4qp"]
 [ext_resource type="Script" uid="uid://pse7mut484yx" path="res://root_scenes/round/player_container.gd" id="3_x50sn"]
 [ext_resource type="PackedScene" uid="uid://ixo1qhmijyhj" path="res://player/player_score_label.tscn" id="5_xjsek"]
-[ext_resource type="Script" uid="uid://d0sin1she2i7h" path="res://root_scenes/round/ScreenShake.gd" id="7_dwge0"]
+[ext_resource type="Script" path="res://root_scenes/round/ScreenShake.gd" id="7_dwge0"]
 [ext_resource type="Script" uid="uid://ducprdchjl7v6" path="res://root_scenes/boss_round/barrier_spawner.gd" id="8_i2ros"]
 [ext_resource type="Script" uid="uid://daq7b4e7y0wc5" path="res://root_scenes/round/barrier_container.gd" id="9_4il28"]
 [ext_resource type="Script" uid="uid://em8w0uk5lckw" path="res://randomise_audio.gd" id="10_4il28"]

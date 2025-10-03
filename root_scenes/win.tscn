@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgq0maqde0fja"]
+[gd_scene load_steps=5 format=3 uid="uid://bgq0maqde0fja"]
 
 [ext_resource type="PackedScene" uid="uid://ixo1qhmijyhj" path="res://player/player_score_label.tscn" id="1_b5h13"]
 [ext_resource type="Script" uid="uid://3l74sdonfok8" path="res://root_scenes/win.gd" id="1_s6ni2"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_s6ni2"]
+action = &"ui_accept"
+
+[sub_resource type="Shortcut" id="Shortcut_tfmg8"]
+events = [SubResource("InputEventAction_s6ni2")]
 
 [node name="Win" type="Control"]
 layout_mode = 3
@@ -33,6 +39,7 @@ offset_right = 36.0
 offset_bottom = -244.0
 grow_horizontal = 2
 grow_vertical = 0
+shortcut = SubResource("Shortcut_tfmg8")
 text = "Continue"
 
 [node name="LabelList" type="VBoxContainer" parent="."]

@@ -79,7 +79,7 @@ func _on_tweezer_spawn_timer_timeout() -> void:
 		1: 10,
 		2: 9,
 		3: 8,
-		4: 7
+		4: 8
 	}.get(len($Boss.health_bar_stages_remaining))
 	$TweezerSpawnTimer.wait_time = new_wait_time
 
@@ -91,6 +91,9 @@ func _on_round_timer_timeout() -> void:
 func _on_boss_health_stage_depleted() -> void:
 	for player in player_container.get_all_players():
 		# this gives them speed again
+		if player.state == player.states.TWEEZED:
+			# don't need to force roll
+			continue
 		player.metrics.blood = 0
 		# super hacky way to force to roll, maybe breaks state machine???
 		var away_from_boss = player.global_position - $Boss.global_position
@@ -107,3 +110,15 @@ func _on_boss_health_stage_depleted() -> void:
 	$BarrierSpawner.spawn_barriers(6)
 	boss_audio.randomise_sound()
 	boss_audio.play()
+	var dead_players = PlayerInputDevices.get_all_players().filter(
+		func(x): return (
+			(
+				player_container.get_player_by_id(x) != null
+				and player_container.get_player_by_id(x).state == Player.states.TWEEZED
+			)
+			or x not in player_container.get_all_players().map(
+				func(y): return y.player_id
+			)
+		)
+	)
+	$PlayerSpawner.spawn_players(dead_players)
