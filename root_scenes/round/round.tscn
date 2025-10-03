@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ll1pmd436rgx"]
+[gd_scene load_steps=13 format=3 uid="uid://ll1pmd436rgx"]
 
 [ext_resource type="Script" uid="uid://c3s7xjasqsoxb" path="res://root_scenes/round/round.gd" id="1_v6yer"]
 [ext_resource type="Script" uid="uid://7vw62jfhqglr" path="res://root_scenes/round/player_spawner.gd" id="2_j0dvr"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://ixo1qhmijyhj" path="res://player/player_score_label.tscn" id="7_bxfx3"]
 [ext_resource type="Script" uid="uid://y35pcjkdfkk1" path="res://root_scenes/round/barrier_spawner.gd" id="8_siu77"]
 [ext_resource type="Script" uid="uid://daq7b4e7y0wc5" path="res://root_scenes/round/barrier_container.gd" id="9_efv08"]
+[ext_resource type="Script" uid="uid://btj4a0fqnffa" path="res://randomise_music.gd" id="10_l55id"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(20, 480)
@@ -103,6 +104,11 @@ offset_top = 448.0
 offset_right = -639.0
 offset_bottom = 471.0
 player_id = 4
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+volume_db = -10.306
+script = ExtResource("10_l55id")
+audio_dir = "res://assets/music/rounds"
 
 [connection signal="timeout" from="TweezerSpawnTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
