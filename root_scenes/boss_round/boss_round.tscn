@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2s3gnbn1u8ee"]
+[gd_scene load_steps=12 format=3 uid="uid://c2s3gnbn1u8ee"]
 
 [ext_resource type="PackedScene" uid="uid://y4u7prqsp0xc" path="res://boss/boss.tscn" id="1_2m0ip"]
 [ext_resource type="Script" uid="uid://pivhiqu4ynfv" path="res://root_scenes/boss_round/boss_round.gd" id="1_x50sn"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://7vw62jfhqglr" path="res://root_scenes/round/player_spawner.gd" id="2_tj4qp"]
 [ext_resource type="Script" uid="uid://pse7mut484yx" path="res://root_scenes/round/player_container.gd" id="3_x50sn"]
 [ext_resource type="PackedScene" uid="uid://ixo1qhmijyhj" path="res://player/player_score_label.tscn" id="5_xjsek"]
+[ext_resource type="Script" uid="uid://d0sin1she2i7h" path="res://root_scenes/round/ScreenShake.gd" id="7_dwge0"]
+[ext_resource type="Script" uid="uid://ducprdchjl7v6" path="res://root_scenes/boss_round/barrier_spawner.gd" id="8_i2ros"]
+[ext_resource type="Script" uid="uid://daq7b4e7y0wc5" path="res://root_scenes/round/barrier_container.gd" id="9_4il28"]
 [ext_resource type="Script" path="res://root_scenes/round/ScreenShake.gd" id="7_dwge0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwge0"]
@@ -98,6 +101,12 @@ player_id = 4
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("7_dwge0")
+
+[node name="BarrierSpawner" type="Node" parent="."]
+script = ExtResource("8_i2ros")
+
+[node name="BarrierContainer" type="Node" parent="BarrierSpawner"]
+script = ExtResource("9_4il28")
 
 [connection signal="died" from="Boss" to="." method="_on_boss_died"]
 [connection signal="health_stage_depleted" from="Boss" to="." method="_on_boss_health_stage_depleted"]

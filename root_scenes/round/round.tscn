@@ -9,8 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://ixo1qhmijyhj" path="res://player/player_score_label.tscn" id="7_bxfx3"]
 [ext_resource type="Script" uid="uid://y35pcjkdfkk1" path="res://root_scenes/round/barrier_spawner.gd" id="8_siu77"]
 [ext_resource type="Script" uid="uid://daq7b4e7y0wc5" path="res://root_scenes/round/barrier_container.gd" id="9_efv08"]
-[ext_resource type="Script" path="res://randomise_music.gd" id="10_l55id"]
-[ext_resource type="Script" path="res://root_scenes/round/ScreenShake.gd" id="11_idtc3"]
+[ext_resource type="Script" uid="uid://btj4a0fqnffa" path="res://randomise_music.gd" id="10_l55id"]
+[ext_resource type="Script" uid="uid://d0sin1she2i7h" path="res://root_scenes/round/ScreenShake.gd" id="11_idtc3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(20, 480)
