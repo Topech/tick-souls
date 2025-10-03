@@ -27,6 +27,10 @@ var transitions = {
 }
 
 
+const TICK_SIZE_MIN_SCALE: Vector2 = Vector2(0.3, 0.3);
+const TICK_SIZE_MAX_SCALE: Vector2 = Vector2(1.0, 1.0);
+
+
 func validate_state_machine(states_: Dictionary, transitions_: Dictionary) -> Error:
 	var all_states = states_.values()
 	var all_states_with_transitions = transitions_.keys()
@@ -98,6 +102,10 @@ var suck_strategy: PlayerSuckStrategy
 @onready var blood_bar = $BloodProgressBar
 @onready var roll_cooldown_bar = $RollCooldownBar
 
+# collision and sprite nodes
+@onready var sprite: Sprite2D = $VisualBody2d/Sprite2D
+@onready var collision_shape: CollisionShape2D = $VisualBody2d/VisualCollision2D
+@onready var visual_body: StaticBody2D = $VisualBody2d
 
 func _ready() -> void:
 	if validate_state_machine(states, transitions) != OK:
@@ -204,7 +212,8 @@ func _process(delta: float) -> void:
 
 	# update UI
 	blood_bar.value = metrics.blood
-
+	update_tick_size()
+	
 	roll_cooldown_bar.value = (
 		100 - (
 			roll_effect.roll_cooldown_timer.time_left \
@@ -215,3 +224,10 @@ func _process(delta: float) -> void:
 
 func tweeze():
 	tweeze_event.trigger()
+	
+
+func update_tick_size():
+	var blood_ratio = metrics.blood / 100.0  # assuming blood is 0-100
+	var new_scale = TICK_SIZE_MIN_SCALE.lerp(TICK_SIZE_MAX_SCALE, blood_ratio)
+	visual_body.scale = new_scale
+	
