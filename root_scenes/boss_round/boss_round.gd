@@ -26,15 +26,13 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if len(player_container.get_all_players()) == 0:
 		round_ended.emit(false)
-	elif $Boss.health_bar.value <= 0:
-		round_ended.emit(true)
-		
+
 	if is_sucking == true:
 		suck_current_intensity = suck_current_intensity + (suck_increase_rate * _delta);
 	else:
 		suck_current_intensity = 0.1
 
-	if prev_boss_health_bar != $Boss.health_bar.value:
+	if prev_boss_health_bar != $Boss.get_health_remaining():
 		is_sucking = true;
 		var players = player_container.get_all_players();
 		for player in players:
@@ -43,7 +41,11 @@ func _process(_delta: float) -> void:
 				break;
 	else:
 		is_sucking = false;
-	prev_boss_health_bar = $Boss.health_bar.value
+	prev_boss_health_bar = $Boss.get_health_remaining()
+
+
+func _on_boss_died():
+		round_ended.emit(true)
 
 
 func _on_tweezers_tweezed_player(player: Player) -> void:
@@ -85,3 +87,15 @@ func _on_tweezer_spawn_timer_timeout() -> void:
 
 func _on_round_timer_timeout() -> void:
 	round_duration += 1
+
+
+func _on_boss_health_stage_depleted() -> void:
+	for player in player_container.get_all_players():
+		# super hacky way to force to roll, maybe breaks state machine???
+		var away_from_boss = player.global_position - $Boss.global_position
+		player.state = player.states.ROLLING
+		player.roll_effect.roll_direction = away_from_boss.normalized()
+		player.roll_effect.is_in_cooldown = false
+		player.roll_effect.roll_speed = 500
+		player.roll_effect.enabled = true
+		player.roll_effect.activate()

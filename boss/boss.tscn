@@ -43,12 +43,61 @@ debug_color = Color(0.886728, 0.30003, 0.365051, 0.42)
 script = ExtResource("2_nnfxe")
 audio_dir = "res://assets/music/boss"
 
-[node name="HealthBar" type="ProgressBar" parent="."]
+[node name="HealthBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -201.0
+offset_right = 40.0
+offset_bottom = -161.0
+
+[node name="HealthBarStage1" type="ProgressBar" parent="HealthBar"]
 modulate = Color(0.770763, 0.312755, 0.289739, 1)
-offset_left = -326.0
-offset_top = -211.0
-offset_right = -19.0
-offset_bottom = -188.0
+layout_mode = 0
+offset_left = -305.0
+offset_top = -13.0
+offset_right = -235.0
+offset_bottom = 10.0
 scale = Vector2(2.12, 1)
-value = 100.0
+max_value = 25.0
+value = 25.0
 show_percentage = false
+metadata/_edit_group_ = true
+
+[node name="HealthBarStage2" type="ProgressBar" parent="HealthBar"]
+modulate = Color(0.770763, 0.312755, 0.289739, 1)
+layout_mode = 0
+offset_left = -151.0
+offset_top = -13.0
+offset_right = -81.0
+offset_bottom = 10.0
+scale = Vector2(2.12, 1)
+max_value = 25.0
+value = 25.0
+show_percentage = false
+metadata/_edit_group_ = true
+
+[node name="HealthBarStage3" type="ProgressBar" parent="HealthBar"]
+modulate = Color(0.770763, 0.312755, 0.289739, 1)
+layout_mode = 0
+offset_left = 2.0
+offset_top = -13.0
+offset_right = 72.0
+offset_bottom = 10.0
+scale = Vector2(2.12, 1)
+max_value = 25.0
+value = 25.0
+show_percentage = false
+metadata/_edit_group_ = true
+
+[node name="HealthBarStage4" type="ProgressBar" parent="HealthBar"]
+modulate = Color(0.770763, 0.312755, 0.289739, 1)
+layout_mode = 0
+offset_left = 156.0
+offset_top = -13.0
+offset_right = 226.0
+offset_bottom = 10.0
+scale = Vector2(2.12, 1)
+max_value = 25.0
+value = 1.0
+show_percentage = false
+metadata/_edit_group_ = true

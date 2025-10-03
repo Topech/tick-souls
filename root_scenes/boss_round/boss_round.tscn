@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://d0sin1she2i7h" path="res://root_scenes/round/ScreenShake.gd" id="7_dwge0"]
 [ext_resource type="Script" uid="uid://ducprdchjl7v6" path="res://root_scenes/boss_round/barrier_spawner.gd" id="8_i2ros"]
 [ext_resource type="Script" uid="uid://daq7b4e7y0wc5" path="res://root_scenes/round/barrier_container.gd" id="9_4il28"]
+[ext_resource type="Script" path="res://root_scenes/round/ScreenShake.gd" id="7_dwge0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwge0"]
 size = Vector2(20, 480)
@@ -107,5 +108,7 @@ script = ExtResource("8_i2ros")
 [node name="BarrierContainer" type="Node" parent="BarrierSpawner"]
 script = ExtResource("9_4il28")
 
+[connection signal="died" from="Boss" to="." method="_on_boss_died"]
+[connection signal="health_stage_depleted" from="Boss" to="." method="_on_boss_health_stage_depleted"]
 [connection signal="timeout" from="TweezerSpawnTimer" to="." method="_on_tweezer_spawn_timer_timeout"]
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]

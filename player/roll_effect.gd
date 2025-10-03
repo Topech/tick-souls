@@ -14,6 +14,7 @@ extends PlayerEffect
 
 var is_in_cooldown: bool = false
 var locked_roll_direction: Vector2
+var locked_roll_speed: int
 @onready var roll_timer = $RollTimer
 @onready var roll_cooldown_timer = $RollCooldownTimer
 
@@ -21,6 +22,7 @@ var locked_roll_direction: Vector2
 func activate():
 	if (not is_in_cooldown and not roll_direction.is_zero_approx()):
 		locked_roll_direction = roll_direction.normalized()
+		locked_roll_speed = roll_speed
 		roll_timer.start()
 		super.activate()
 
@@ -39,7 +41,7 @@ func apply(_delta: float):
 			new_rotation *= -1
 		target_rotate_node.rotation_degrees = new_rotation
 
-		target_move_node.velocity = locked_roll_direction * roll_speed
+		target_move_node.velocity = locked_roll_direction * locked_roll_speed
 		target_move_node.move_and_slide()
 
 
