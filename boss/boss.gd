@@ -44,6 +44,8 @@ func _process(delta: float) -> void:
 	if get_current_health_bar_stage() == null:
 		died.emit()
 	
+	var anybody_sucking = false
+	
 	for body in player_sucking_box.get_overlapping_bodies():
 		# debugging purposes
 		if body == $PlayerCollisionBox:
@@ -59,6 +61,12 @@ func _process(delta: float) -> void:
 
 		if player.state == player.states.SUCKING:
 			decrease_health(delta)
+			anybody_sucking = true
+	
+	if anybody_sucking:
+		$Sprite2D.frame = 1
+	else:
+		$Sprite2D.frame = 0
 
 
 func decrease_health(delta: float):
