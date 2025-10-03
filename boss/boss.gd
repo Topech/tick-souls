@@ -2,6 +2,7 @@ extends Node2D
 
 
 signal died
+signal health_stage_depleted
 
 
 @onready var player_sucking_box = $PlayerSuckingBox
@@ -30,6 +31,15 @@ func next_health_bar_stage() -> void:
 	health_bar_stages_remaining.pop_front()
 
 
+func get_health_remaining() -> float:
+	return (
+		health_bar_stage_1.value
+		+ health_bar_stage_2.value
+		+ health_bar_stage_3.value
+		+ health_bar_stage_4.value
+	)
+
+
 func _process(delta: float) -> void:
 	if get_current_health_bar_stage() == null:
 		died.emit()
@@ -56,8 +66,9 @@ func decrease_health(delta: float):
 	health_bar_stage.value -= 2 * delta
 	
 	if health_bar_stage.value <= 0:
-		_on_health_bar_stage_end()
+		_on_health_bar_stage_depletion()
 
 
-func _on_health_bar_stage_end():
+func _on_health_bar_stage_depletion():
 	next_health_bar_stage()
+	health_stage_depleted.emit()
