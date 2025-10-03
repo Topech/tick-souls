@@ -14,6 +14,8 @@ signal start_boss
 @onready var p3_sprite = $PlayerIndicator3/WiggleSprite
 @onready var p4_sprite = $PlayerIndicator4/WiggleSprite
 
+# this is for boss cheat code
+var b_press_count = 0
 
 
 func _process(_delta: float) -> void:
@@ -32,12 +34,15 @@ func _process(_delta: float) -> void:
 	p3_sprite.modulate = player_details_3.tinge
 	p4_sprite.modulate = player_details_4.tinge
 
+	if b_press_count >= 10:
+		start_boss.emit()
+
 
 func _on_button_pressed() -> void:
 	if len(PlayerInputDevices.get_all_players()) > 0:
 		start_game.emit()
 
 
-func _on_boss_button_pressed() -> void:
-	if len(PlayerInputDevices.get_all_players()) > 0:
-		start_boss.emit()
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("menu_skip_to_boss"):
+		b_press_count += 1

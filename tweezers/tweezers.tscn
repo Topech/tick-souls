@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://vrmuj5r511pl" path="res://tweezers.gd" id="1_w0b0y"]
 [ext_resource type="Texture2D" uid="uid://cjkji2ehqffjy" path="res://assets/tweezer_spritesheet.png" id="2_ewwud"]
-[ext_resource type="AudioStream" path="res://assets/sound_effects/tweezers-1.mp3" id="3_ewwud"]
+[ext_resource type="AudioStream" uid="uid://co6lupkahkw1q" path="res://assets/sound_effects/tweeze/tweezers-1.mp3" id="3_ewwud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
 
