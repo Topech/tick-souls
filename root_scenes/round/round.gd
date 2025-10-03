@@ -30,6 +30,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	calc_players_points(delta)
+	var players = player_container.get_all_players();
+	for player in players:
+		if player.state == player.states.SUCKING:
+			$Camera2D.start_shake()
+			break;
 
 	if len(player_container.get_all_players()) == 0:
 		round_ended.emit(round_duration)

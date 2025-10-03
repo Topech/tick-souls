@@ -10,6 +10,11 @@ signal round_ended
 ## in secs
 var round_duration: int = 0
 
+var prev_boss_health_bar: float = 0.0;
+var suck_current_intensity: float = 0.1;
+var is_sucking: bool = false;
+const suck_increase_rate: float = 2;
+
 
 func _ready() -> void:
 	# spawn first one early
@@ -23,6 +28,22 @@ func _process(_delta: float) -> void:
 		round_ended.emit(false)
 	elif $Boss.health_bar.value <= 0:
 		round_ended.emit(true)
+		
+	if is_sucking == true:
+		suck_current_intensity = suck_current_intensity + (suck_increase_rate * _delta);
+	else:
+		suck_current_intensity = 0.1
+
+	if prev_boss_health_bar != $Boss.health_bar.value:
+		is_sucking = true;
+		var players = player_container.get_all_players();
+		for player in players:
+			if player.state == player.states.SUCKING:
+				$Camera2D.start_shake(0.1, suck_current_intensity)
+				break;
+	else:
+		is_sucking = false;
+	prev_boss_health_bar = $Boss.health_bar.value
 
 
 func _on_tweezers_tweezed_player(player: Player) -> void:
