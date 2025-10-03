@@ -75,13 +75,12 @@ func _on_tweezer_spawn_timer_timeout() -> void:
 	add_child(tweezers)
 	tweezers.tweezed_player.connect((_on_tweezers_tweezed_player))
 	tweezers.failed.connect(_on_tweezers_failed)
-	const min_spawn_rate = 0.5
-	const max_spawn_rate = 10.0
-	const secs_until_max_spawn_rate = 120.0
-	var new_wait_time = max(
-		min_spawn_rate,
-		max_spawn_rate - (max_spawn_rate - min_spawn_rate) * (float(round_duration) / secs_until_max_spawn_rate)
-	)
+	var new_wait_time = {
+		1: 10,
+		2: 9,
+		3: 8,
+		4: 7
+	}.get(len($Boss.health_bar_stages_remaining))
 	$TweezerSpawnTimer.wait_time = new_wait_time
 
 
@@ -91,6 +90,8 @@ func _on_round_timer_timeout() -> void:
 
 func _on_boss_health_stage_depleted() -> void:
 	for player in player_container.get_all_players():
+		# this gives them speed again
+		player.metrics.blood = 0
 		# super hacky way to force to roll, maybe breaks state machine???
 		var away_from_boss = player.global_position - $Boss.global_position
 		player.state = player.states.ROLLING
@@ -99,3 +100,6 @@ func _on_boss_health_stage_depleted() -> void:
 		player.roll_effect.roll_speed = 500
 		player.roll_effect.enabled = true
 		player.roll_effect.activate()
+		# these are just in case you sucking
+		player.suck_effect.deactivate()
+		player.suck_audio.stop()
