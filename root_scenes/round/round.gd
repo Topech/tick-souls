@@ -40,7 +40,8 @@ func _on_tweezers_tweezed_player(player: Player) -> void:
 	# give time to delete player so it can go off screen
 	var timer = get_tree().create_timer(3.0)
 	timer.timeout.connect(func():
-		player.queue_free()
+		if player != null:
+			player.queue_free()
 	)
 	
 
