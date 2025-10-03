@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ll1pmd436rgx"]
+[gd_scene load_steps=12 format=3 uid="uid://ll1pmd436rgx"]
 
 [ext_resource type="Script" uid="uid://c3s7xjasqsoxb" path="res://root_scenes/round/round.gd" id="1_v6yer"]
 [ext_resource type="Script" uid="uid://7vw62jfhqglr" path="res://root_scenes/round/player_spawner.gd" id="2_j0dvr"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cqef7kj40c3xm" path="res://root_scenes/round/backgrounds/lizard_skin_color.tscn" id="3_on8o6"]
 [ext_resource type="Script" uid="uid://pse7mut484yx" path="res://root_scenes/round/player_container.gd" id="3_y8in6"]
 [ext_resource type="PackedScene" uid="uid://ixo1qhmijyhj" path="res://player/player_score_label.tscn" id="7_bxfx3"]
+[ext_resource type="Script" path="res://root_scenes/round/barrier_spawner.gd" id="8_siu77"]
+[ext_resource type="Script" path="res://root_scenes/round/barrier_container.gd" id="9_efv08"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(20, 480)
@@ -54,15 +56,19 @@ script = ExtResource("2_j0dvr")
 script = ExtResource("3_y8in6")
 
 [node name="PlayerSpawn1" type="Marker2D" parent="PlayerSpawner"]
+unique_name_in_owner = true
 position = Vector2(107, 97)
 
 [node name="PlayerSpawn2" type="Marker2D" parent="PlayerSpawner"]
+unique_name_in_owner = true
 position = Vector2(646, 96)
 
 [node name="PlayerSpawn3" type="Marker2D" parent="PlayerSpawner"]
+unique_name_in_owner = true
 position = Vector2(110, 348)
 
 [node name="PlayerSpawn4" type="Marker2D" parent="PlayerSpawner"]
+unique_name_in_owner = true
 position = Vector2(658, 358)
 
 [node name="RoundTimer" type="Timer" parent="."]
@@ -91,6 +97,12 @@ offset_top = 448.0
 offset_right = -639.0
 offset_bottom = 471.0
 player_id = 4
+
+[node name="BarrierSpawner" type="Node" parent="."]
+script = ExtResource("8_siu77")
+
+[node name="BarrierContainer" type="Node" parent="BarrierSpawner"]
+script = ExtResource("9_efv08")
 
 [connection signal="timeout" from="TweezerSpawnTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
