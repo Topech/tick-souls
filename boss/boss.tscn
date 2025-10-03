@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://y4u7prqsp0xc"]
 
 [ext_resource type="Texture2D" uid="uid://cmxu2vbip0up3" path="res://assets/XavFace_spritesheet.png" id="1_b105h"]
-[ext_resource type="Script" path="res://boss/boss.gd" id="1_nnfxe"]
-[ext_resource type="Script" uid="uid://btj4a0fqnffa" path="res://randomise_music.gd" id="2_nnfxe"]
+[ext_resource type="Script" uid="uid://dcjb6jp1j44p4" path="res://boss/boss.gd" id="1_nnfxe"]
+[ext_resource type="Script" path="res://randomise_music.gd" id="2_nnfxe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nnfxe"]
 atlas = ExtResource("1_b105h")
