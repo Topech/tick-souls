@@ -99,3 +99,6 @@ func _on_boss_health_stage_depleted() -> void:
 		player.roll_effect.roll_speed = 500
 		player.roll_effect.enabled = true
 		player.roll_effect.activate()
+		
+	# Spawn pimples
+	$BarrierSpawner.spawn_barriers(6)

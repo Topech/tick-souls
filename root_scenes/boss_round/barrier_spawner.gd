@@ -10,7 +10,7 @@ func _ready() -> void:
 	pass
 		
 func spawn_barriers(total: int):
-	var existing_barrier_positions = [];
+	var existing_barrier_positions : Array[Vector2] = [];
 	for child in barrier_container.get_children():
 		if child is Node2D:  # make sure it has a position
 			existing_barrier_positions.append(child.position)
