@@ -1,20 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://jv57t5gdjcy7"]
+[gd_scene load_steps=3 format=3 uid="uid://jv57t5gdjcy7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ulqpc"]
+[ext_resource type="Texture2D" uid="uid://d3vmm62yfuh6e" path="res://assets/pimple.png" id="1_sbuxa"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4fmue"]
+radius = 8.66667
+height = 17.3333
 
 [node name="Pimples" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2, -6)
+scale = Vector2(2.09375, 2.09375)
+texture = ExtResource("1_sbuxa")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_ulqpc")
-
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D/CollisionShape2D"]
-light_mask = 2
-visibility_layer = 2
-offset_left = -9.0
-offset_top = -9.0
-offset_right = 9.0
-offset_bottom = 9.0
-color = Color(1, 0.431373, 0.490196, 1)
+shape = SubResource("CapsuleShape2D_4fmue")
