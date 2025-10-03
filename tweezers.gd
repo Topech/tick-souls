@@ -17,6 +17,8 @@ signal failed
 enum tweezer_states {
 	SHADOW_ONLY,
 	FOLLOWING,
+	TELEGRAPH,
+	PRE_TWEEZE,
 	TWEEZING,
 	FAILED,
 }
@@ -26,9 +28,12 @@ var tweezed_player_node: Player = null
 var _target_switch_cooldown: bool = false
 var _target_switch_cooldown_duration: float = 2.0
 var _tweezer_completion: float = 0  # between 0 and 1
+var _pre_tweeze_animation_timer = 0;
+var _pre_tweeze_animation_flag = false;
 
 var tweezer_state = tweezer_states.FOLLOWING
 
+const _pre_tweeze_animation_interval: float = 0.1;
 
 func _ready() -> void:
 	tweezer_visuals.visible = false
@@ -45,10 +50,14 @@ func _process(delta: float) -> void:
 	if tweezer_state == tweezer_states.TWEEZING:
 		# tweezer sorted itself
 		pass
-	elif _tweezer_completion < 0.4:
+	elif _tweezer_completion < 0.3:
 		tweezer_state = tweezer_states.SHADOW_ONLY
-	elif _tweezer_completion < 0.9:
+	elif _tweezer_completion < 0.5:
 		tweezer_state = tweezer_states.FOLLOWING
+	elif _tweezer_completion < 0.7:
+		tweezer_state = tweezer_states.TELEGRAPH
+	elif _tweezer_completion < 1:
+		tweezer_state = tweezer_states.PRE_TWEEZE
 	elif _tweezer_completion >= 1:
 		tweezer_state = tweezer_states.FAILED
 
@@ -67,6 +76,8 @@ func _process(delta: float) -> void:
 	if (
 		tweezer_state == tweezer_states.SHADOW_ONLY
 		or tweezer_state == tweezer_states.FOLLOWING
+		or tweezer_state == tweezer_states.TELEGRAPH
+		or tweezer_state == tweezer_states.PRE_TWEEZE
 	):
 		velocity = position.direction_to(target_node.position) * tweezer_follow_rate
 		move_and_slide()
@@ -80,6 +91,25 @@ func _process(delta: float) -> void:
 		)
 	if tweezer_state == tweezer_states.FOLLOWING:
 		$TweezerVisuals.visible = true
+	if tweezer_state == tweezer_states.TELEGRAPH:
+		_pre_tweeze_animation_timer += delta;
+		if _pre_tweeze_animation_timer >= _pre_tweeze_animation_interval:
+			_pre_tweeze_animation_flag = !_pre_tweeze_animation_flag;
+			_pre_tweeze_animation_timer = 0
+		if _pre_tweeze_animation_flag == true:
+			tweezer_visuals.frame = 0
+		else:
+			tweezer_visuals.frame = 1
+	if tweezer_state == tweezer_states.PRE_TWEEZE:
+		_pre_tweeze_animation_timer += delta;
+		if _pre_tweeze_animation_timer >= _pre_tweeze_animation_interval:
+			_pre_tweeze_animation_flag = !_pre_tweeze_animation_flag;
+			_pre_tweeze_animation_timer = 0
+		
+		if _pre_tweeze_animation_flag == true:
+			tweezer_visuals.frame = 0
+		else:
+			tweezer_visuals.frame = 3
 		check_for_tweezable_player()
 	if tweezer_state == tweezer_states.FAILED:
 		failed.emit(self)
@@ -89,7 +119,7 @@ func _process(delta: float) -> void:
 		move_and_slide()
 		if tweezed_player_node != null:
 			tweezed_player_node.position = position
-		$TweezerVisuals.frame = 1
+		tweezer_visuals.frame = 3
 
 
 func tweeze_player(player):
