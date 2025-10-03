@@ -22,6 +22,24 @@ offset_top = 3.0
 offset_right = 842.0
 offset_bottom = 484.0
 
+[node name="Wall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(-8, 241)
+shape = SubResource("RectangleShape2D_dwge0")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
+position = Vector2(855, 241)
+shape = SubResource("RectangleShape2D_dwge0")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Wall"]
+position = Vector2(424.5, -6)
+shape = SubResource("RectangleShape2D_dx35v")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Wall"]
+position = Vector2(426, 487)
+shape = SubResource("RectangleShape2D_dx35v")
+
 [node name="Boss" parent="." instance=ExtResource("1_2m0ip")]
 position = Vector2(418, 264)
 
@@ -74,24 +92,6 @@ offset_top = 448.0
 offset_right = -639.0
 offset_bottom = 471.0
 player_id = 4
-
-[node name="Wall" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
-position = Vector2(-8, 241)
-shape = SubResource("RectangleShape2D_dwge0")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
-position = Vector2(855, 241)
-shape = SubResource("RectangleShape2D_dwge0")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Wall"]
-position = Vector2(424.5, -6)
-shape = SubResource("RectangleShape2D_dx35v")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Wall"]
-position = Vector2(426, 487)
-shape = SubResource("RectangleShape2D_dx35v")
 
 [connection signal="timeout" from="TweezerSpawnTimer" to="." method="_on_tweezer_spawn_timer_timeout"]
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]

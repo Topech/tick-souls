@@ -49,6 +49,12 @@ shape = SubResource("RectangleShape2D_h2yge")
 wait_time = 9.95
 autostart = true
 
+[node name="BarrierSpawner" type="Node" parent="."]
+script = ExtResource("8_siu77")
+
+[node name="BarrierContainer" type="Node" parent="BarrierSpawner"]
+script = ExtResource("9_efv08")
+
 [node name="PlayerSpawner" type="Node" parent="."]
 script = ExtResource("2_j0dvr")
 
@@ -97,12 +103,6 @@ offset_top = 448.0
 offset_right = -639.0
 offset_bottom = 471.0
 player_id = 4
-
-[node name="BarrierSpawner" type="Node" parent="."]
-script = ExtResource("8_siu77")
-
-[node name="BarrierContainer" type="Node" parent="BarrierSpawner"]
-script = ExtResource("9_efv08")
 
 [connection signal="timeout" from="TweezerSpawnTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
