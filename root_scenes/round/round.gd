@@ -57,7 +57,13 @@ func _on_timer_timeout() -> void:
 	add_child(tweezers)
 	tweezers.tweezed_player.connect((_on_tweezers_tweezed_player))
 	tweezers.failed.connect(_on_tweezers_failed)
-	var new_wait_time = max(3, 10 - 7.0 * (float(round_duration) / 120.0))
+	const min_spawn_rate = 0.5
+	const max_spawn_rate = 10.0
+	const secs_until_max_spawn_rate = 120.0
+	var new_wait_time = max(
+		min_spawn_rate,
+		max_spawn_rate - (max_spawn_rate - min_spawn_rate) * (float(round_duration) / secs_until_max_spawn_rate)
+	)
 	$TweezerSpawnTimer.wait_time = new_wait_time
 
 
