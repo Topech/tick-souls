@@ -5,6 +5,7 @@ extends Node
 var round_: Node
 var boss_round: Node
 var round_leaderboard: Node
+var win_board: Node
 
 
 func _on_main_menu_start_game() -> void:
@@ -17,6 +18,7 @@ func _on_main_menu_start_game() -> void:
 
 func _on_main_menu_start_boss() -> void:
 	boss_round = preload("res://root_scenes/boss_round/boss_round.tscn").instantiate()
+	boss_round.round_ended.connect(_on_boss_end)
 	add_child(boss_round)
 	if main_menu != null:
 		remove_child(main_menu)
@@ -41,4 +43,12 @@ func _on_round_end(round_duration: int) -> void:
 	add_child(round_leaderboard)
 	remove_child(round_)
 	round_ = null
+
+
+func _on_boss_end(did_win: bool) -> void:
+	win_board = preload("res://root_scenes/win.tscn").instantiate()
+	win_board.did_win = did_win
+	add_child(win_board)
+	remove_child(boss_round)
+	boss_round = null
 	

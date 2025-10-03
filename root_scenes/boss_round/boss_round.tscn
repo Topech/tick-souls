@@ -21,6 +21,8 @@ offset_left = -5.0
 offset_top = 3.0
 offset_right = 842.0
 offset_bottom = 484.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Wall" type="StaticBody2D" parent="."]
 

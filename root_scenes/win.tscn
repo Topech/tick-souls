@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgq0maqde0fja"]
+
+[ext_resource type="PackedScene" uid="uid://ixo1qhmijyhj" path="res://player/player_score_label.tscn" id="1_b5h13"]
+[ext_resource type="Script" uid="uid://3l74sdonfok8" path="res://root_scenes/win.gd" id="1_s6ni2"]
+
+[node name="Win" type="Node2D"]
+script = ExtResource("1_s6ni2")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 391.0
+offset_top = 106.0
+offset_right = 459.0
+offset_bottom = 129.0
+text = "You Win!"
+
+[node name="LabelList" type="VBoxContainer" parent="."]
+offset_left = 42.0
+offset_top = 186.0
+offset_right = 242.0
+offset_bottom = 308.0
+theme_override_constants/separation = 10
+
+[node name="PlayerScoreLabel1" parent="LabelList" instance=ExtResource("1_b5h13")]
+layout_mode = 2
+player_id = 1
+
+[node name="PlayerScoreLabel2" parent="LabelList" instance=ExtResource("1_b5h13")]
+layout_mode = 2
+player_id = 2
+
+[node name="PlayerScoreLabel3" parent="LabelList" instance=ExtResource("1_b5h13")]
+layout_mode = 2
+player_id = 3
+
+[node name="PlayerScoreLabel4" parent="LabelList" instance=ExtResource("1_b5h13")]
+layout_mode = 2
+player_id = 4
