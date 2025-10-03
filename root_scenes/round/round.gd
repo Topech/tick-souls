@@ -18,7 +18,7 @@ func _ready() -> void:
 	var backgrounds = [
 		$CrapSkinColor,
 		$CrapSkinColor2,
-		$LizardSkinColor,
+		#$LizardSkinColor,
 	]
 
 	var chosen_bg_ii: int = randi_range(0, len(backgrounds) -1)
