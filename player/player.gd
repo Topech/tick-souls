@@ -132,7 +132,7 @@ func _process(delta: float) -> void:
 	walk_effect.direction = walk_event.direction
 	roll_effect.roll_direction = walk_event.direction
 	roll_effect.roll_speed = 1.5 * metrics.base_speed + 2 * metrics.blood
-	roll_effect.roll_cooldown_duration = 0.9 + 0.6 * (metrics.blood / 100)
+	roll_effect.roll_cooldown_duration = 1.0 + 1.0 * (metrics.blood / 100)
 
 
 	var old_state: states = state

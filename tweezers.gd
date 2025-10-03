@@ -61,7 +61,7 @@ func _process(delta: float) -> void:
 	elif _tweezer_completion >= 1:
 		tweezer_state = tweezer_states.FAILED
 
-	$Shadow/DebugColorRect.color.a += shadow_alpha_rate * delta
+	$Shadow/Sprite2D.modulate.a += shadow_alpha_rate * delta
 
 	#match (tweezer_state):
 		#tweezer_states.SHADOW_ONLY or tweezer_states.FOLLOWING:
