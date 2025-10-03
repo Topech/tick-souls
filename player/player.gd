@@ -130,7 +130,9 @@ func _process(delta: float) -> void:
 	walk_effect.speed = metrics.speed
 	walk_effect.direction = walk_event.direction
 	roll_effect.roll_direction = walk_event.direction
-	roll_effect.roll_speed = 3 * metrics.speed
+	roll_effect.roll_speed = 1.5 * metrics.base_speed + 2 * metrics.blood
+	roll_effect.roll_cooldown_duration = 0.9 + 0.6 * (metrics.blood / 100)
+
 
 	var old_state: states = state
 
@@ -205,7 +207,6 @@ func _process(delta: float) -> void:
 				suck_audio.play()
 			
 			suck_strategy.suck(delta)
-			roll_effect.roll_cooldown_duration = 1.1 + 0.2 * (metrics.blood / 100)
 
 		states.IDLE, _:
 			walk_effect.enabled = false
