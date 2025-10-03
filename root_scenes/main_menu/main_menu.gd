@@ -9,12 +9,28 @@ signal start_boss
 @onready var p3_label = $PlayerIndicator3/Label
 @onready var p4_label = $PlayerIndicator4/Label
 
+@onready var p1_sprite = $PlayerIndicator1/WiggleSprite
+@onready var p2_sprite = $PlayerIndicator2/WiggleSprite
+@onready var p3_sprite = $PlayerIndicator3/WiggleSprite
+@onready var p4_sprite = $PlayerIndicator4/WiggleSprite
+
+
 
 func _process(_delta: float) -> void:
-	p1_label.text = Global.player_details_lookup[Global.players.PLAYER_1].name + " - Ready?"
-	p2_label.text = Global.player_details_lookup[Global.players.PLAYER_2].name + " - Ready?"
-	p3_label.text = Global.player_details_lookup[Global.players.PLAYER_3].name + " - Ready?"
-	p4_label.text = Global.player_details_lookup[Global.players.PLAYER_4].name + " - Ready?"
+	var player_details_1 = Global.player_details_lookup[Global.players.PLAYER_1]
+	var player_details_2 = Global.player_details_lookup[Global.players.PLAYER_2]
+	var player_details_3 = Global.player_details_lookup[Global.players.PLAYER_3]
+	var player_details_4 = Global.player_details_lookup[Global.players.PLAYER_4]
+
+	p1_label.text = player_details_1.name + " - Ready?"
+	p2_label.text = player_details_2.name + " - Ready?"
+	p3_label.text = player_details_3.name + " - Ready?"
+	p4_label.text = player_details_4.name + " - Ready?"
+
+	p1_sprite.modulate = player_details_1.tinge
+	p2_sprite.modulate = player_details_2.tinge
+	p3_sprite.modulate = player_details_3.tinge
+	p4_sprite.modulate = player_details_4.tinge
 
 
 func _on_button_pressed() -> void:

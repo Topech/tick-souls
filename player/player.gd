@@ -81,6 +81,7 @@ func transition(current: states, next: states) -> states:
 # data structures
 @onready var state = states.IDLE
 @onready var metrics = PlayerMetrics.new()
+@onready var player_details: Global.PlayerDetails = Global.player_details_lookup[player_id]
 var suck_strategy: PlayerSuckStrategy
 
 # control nodes
@@ -107,16 +108,19 @@ var suck_strategy: PlayerSuckStrategy
 @onready var collision_shape: CollisionShape2D = $VisualBody2d/VisualCollision2D
 @onready var visual_body: StaticBody2D = $VisualBody2d
 
+
 func _ready() -> void:
 	if validate_state_machine(states, transitions) != OK:
 		push_error("state machine is invalid")
-	
+
 	if suck_strategy_type == Global.SuckStrategyType.STANDARD:
 		suck_strategy = PlayerSuckStrategyStandard.new(metrics)
 	elif suck_strategy_type == Global.SuckStrategyType.BOSS:
 		suck_strategy = PlayerSuckStrategyBoss.new(metrics, suck_ray)
 	else:
 		push_error("invalid suck_strategy_type")
+
+	visual_body.modulate = player_details.tinge
 
 
 func _process(delta: float) -> void:
