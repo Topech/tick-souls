@@ -60,6 +60,7 @@ func _process(delta: float) -> void:
 	
 	if target_node == null or target_node.is_queued_for_deletion():
 		target_node = null
+		queue_free()
 		# break early
 		return
 
