@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d3vmm62yfuh6e" path="res://assets/pimple.png" id="1_sbuxa"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4fmue"]
-radius = 8.66667
+radius = 8.66665
 height = 17.3333
 
 [node name="Pimples" type="Node2D"]

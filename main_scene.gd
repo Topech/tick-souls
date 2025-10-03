@@ -38,6 +38,14 @@ func _on_leaderboard_continue() -> void:
 		add_child(boss_round)
 	remove_child(round_leaderboard)
 	round_leaderboard = null
+	
+func _on_win_board_continue() -> void:
+	main_menu = preload("res://root_scenes/main_menu/main_menu.tscn").instantiate()
+	main_menu.start_game.connect(_on_main_menu_start_game)
+	main_menu.start_boss.connect(_on_main_menu_start_boss)
+	remove_child(win_board)
+	win_board = null
+	add_child(main_menu)
 
 
 func _on_round_end(round_duration: int) -> void:
@@ -53,6 +61,7 @@ func _on_round_end(round_duration: int) -> void:
 func _on_boss_end(did_win: bool) -> void:
 	win_board = preload("res://root_scenes/win.tscn").instantiate()
 	win_board.did_win = did_win
+	win_board.continue_pressed.connect(_on_win_board_continue)
 	add_child(win_board)
 	remove_child(boss_round)
 	boss_round = null
