@@ -57,3 +57,4 @@ vframes = 2
 
 [node name="TweezeAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ewwud")
+volume_db = 24.0

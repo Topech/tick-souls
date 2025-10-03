@@ -116,14 +116,17 @@ one_shot = true
 script = ExtResource("12_ebec5")
 
 [node name="SuckAudio" type="AudioStreamPlayer" parent="."]
+volume_db = 24.0
 script = ExtResource("13_kb6p2")
 resources = Array[AudioStream]([ExtResource("12_yllr7"), ExtResource("13_32hag"), ExtResource("15_tqiix"), ExtResource("16_c35mf")])
 
 [node name="SqueezeAudio" type="AudioStreamPlayer" parent="."]
+volume_db = 8.982
 script = ExtResource("13_kb6p2")
 resources = Array[AudioStream]([ExtResource("13_yllr7"), ExtResource("17_e7oew"), ExtResource("18_c35mf")])
 
 [node name="RollAudio" type="AudioStreamPlayer" parent="."]
+volume_db = 9.927
 script = ExtResource("13_kb6p2")
 resources = Array[AudioStream]([ExtResource("20_65viv"), ExtResource("21_bjvpn"), ExtResource("22_s7qer")])
 
