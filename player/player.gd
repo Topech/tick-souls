@@ -98,6 +98,7 @@ var suck_strategy: PlayerSuckStrategy
 @onready var suck_audio = $SuckAudio
 @onready var squeeze_audio = $SqueezeAudio
 @onready var roll_audio = $RollAudio
+@onready var tweeze_scream_audio = $TweezeScreamAudio
 
 # ui nodes
 @onready var blood_bar = $BloodProgressBar
@@ -172,8 +173,7 @@ func _process(delta: float) -> void:
 			suck_effect.enabled = false
 			
 			if old_state != states.TWEEZED:
-				squeeze_audio.randomise_sound()
-				squeeze_audio.play()
+				play_tweezed_audio()
 
 		states.WALKING:
 			walk_effect.enabled = true
@@ -228,6 +228,11 @@ func _process(delta: float) -> void:
 func tweeze():
 	tweeze_event.trigger()
 	
+func play_tweezed_audio():
+	squeeze_audio.randomise_sound()
+	squeeze_audio.play()
+	tweeze_scream_audio.randomise_sound()
+	tweeze_scream_audio.play()
 
 func update_tick_size():
 	var blood_ratio = metrics.blood / 100.0  # assuming blood is 0-100
