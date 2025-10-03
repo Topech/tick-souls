@@ -5,7 +5,7 @@ signal round_ended
 
 
 @onready var player_container = $PlayerSpawner/PlayerContainer
-
+@onready var boss_audio = $BossAudio
 
 ## in secs
 var round_duration: int = 0
@@ -104,5 +104,6 @@ func _on_boss_health_stage_depleted() -> void:
 		player.suck_effect.deactivate()
 		player.suck_audio.stop()
 		
-	# Spawn pimples
 	$BarrierSpawner.spawn_barriers(6)
+	boss_audio.randomise_sound()
+	boss_audio.play()

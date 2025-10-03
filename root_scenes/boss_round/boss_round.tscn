@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2s3gnbn1u8ee"]
+[gd_scene load_steps=13 format=3 uid="uid://c2s3gnbn1u8ee"]
 
 [ext_resource type="PackedScene" uid="uid://y4u7prqsp0xc" path="res://boss/boss.tscn" id="1_2m0ip"]
 [ext_resource type="Script" uid="uid://pivhiqu4ynfv" path="res://root_scenes/boss_round/boss_round.gd" id="1_x50sn"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://d0sin1she2i7h" path="res://root_scenes/round/ScreenShake.gd" id="7_dwge0"]
 [ext_resource type="Script" uid="uid://ducprdchjl7v6" path="res://root_scenes/boss_round/barrier_spawner.gd" id="8_i2ros"]
 [ext_resource type="Script" uid="uid://daq7b4e7y0wc5" path="res://root_scenes/round/barrier_container.gd" id="9_4il28"]
+[ext_resource type="Script" uid="uid://em8w0uk5lckw" path="res://randomise_audio.gd" id="10_4il28"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwge0"]
 size = Vector2(20, 480)
@@ -106,6 +107,11 @@ script = ExtResource("8_i2ros")
 
 [node name="BarrierContainer" type="Node" parent="BarrierSpawner"]
 script = ExtResource("9_4il28")
+
+[node name="BossAudio" type="AudioStreamPlayer" parent="."]
+volume_db = 24.0
+script = ExtResource("10_4il28")
+audio_dir = "res://assets/sound_effects/laugh"
 
 [connection signal="died" from="Boss" to="." method="_on_boss_died"]
 [connection signal="health_stage_depleted" from="Boss" to="." method="_on_boss_health_stage_depleted"]
