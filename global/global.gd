@@ -10,15 +10,15 @@ enum players {
 	PLAYER_4
 }
 
-var all_possible_players = Array(Global.players.values()).filter(func(x): return x != Global.players.NO_PLAYER)
+var all_possible_players = Array(players.values()).filter(func(x): return x != players.NO_PLAYER)
 
 
 class PlayerDetails:
 	var score: float = 0
 	var name: String
 
-	func _init(name: String) -> void:
-		self.name = name
+	func _init(name_: String) -> void:
+		self.name = name_
 
 
 var player_details_lookup = {

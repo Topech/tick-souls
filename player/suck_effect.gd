@@ -4,7 +4,7 @@ extends PlayerEffect
 @export var target_rotate_node: Node2D
 
 
-func apply(delta: float):
+func apply(_delta: float):
 	target_rotate_node.rotation_degrees = 180
 
 

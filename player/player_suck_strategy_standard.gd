@@ -10,5 +10,5 @@ func _init(metrics: PlayerMetrics):
 
 func suck(delta: float) -> void:
 	const BLOOD_PER_SEC = 10
-	_metrics.blood += BLOOD_PER_SEC * delta
-	_metrics.speed = 100 - 50 * (_metrics.blood / 100)
+	_metrics.blood += float(BLOOD_PER_SEC) * delta
+	_metrics.speed = 100 - 50 * (round(_metrics.blood) / 100)

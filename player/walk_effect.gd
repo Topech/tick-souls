@@ -8,6 +8,6 @@ extends PlayerEffect
 @export var speed: int = 100
 
 
-func apply(delta: float):
+func apply(_delta: float):
 	target_move_node.velocity = direction.normalized() * speed
 	target_move_node.move_and_slide()

@@ -11,7 +11,7 @@ func _ready():
 	input_direction_node.device_id = player_device.device_id
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	direction = input_direction_node.direction
 	if not direction.is_zero_approx():
 		trigger()

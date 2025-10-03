@@ -16,6 +16,7 @@ enum SpecialStateTransistions {
 	NONE
 }
 
+
 var transitions = {
 	states.INVALID: SpecialStateTransistions.INVALID,
 	states.IDLE: SpecialStateTransistions.ANY,
@@ -28,16 +29,16 @@ var transitions = {
 
 func validate_state_machine(states_: Dictionary, transitions_: Dictionary) -> Error:
 	var all_states = states_.values()
-	var all_states_with_transitions = transitions.keys()
+	var all_states_with_transitions = transitions_.keys()
 
 	# check transition has all states
-	for state in all_states:
-		if not all_states_with_transitions.has(state):
+	for state_ in all_states:
+		if not all_states_with_transitions.has(state_):
 			return ERR_INVALID_DATA
 
 	# check states has all transition states
-	for state in all_states_with_transitions:
-		if not all_states.has(state):
+	for state_ in all_states_with_transitions:
+		if not all_states.has(state_):
 			return ERR_INVALID_DATA
 
 	return OK

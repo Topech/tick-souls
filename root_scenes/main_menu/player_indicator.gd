@@ -14,7 +14,7 @@ func _ready():
 	wiggle_sprite.visible = false
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var player_device = PlayerInputDevices.get_players_device(player_id)
 	if not player_device.is_invalid():
 		color = Color.GREEN

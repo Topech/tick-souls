@@ -1,5 +1,5 @@
 class_name PlayerSuckStrategy extends Resource
 
 
-func suck(delta: float):
+func suck(_delta: float):
 	pass

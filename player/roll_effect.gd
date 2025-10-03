@@ -30,7 +30,7 @@ func deactivate():
 	super.deactivate()
 
 
-func apply(delta: float):
+func apply(_delta: float):
 	if not is_in_cooldown:
 		var timer_percent_complete = (roll_timer.wait_time - roll_timer.time_left) * 1 / roll_timer.wait_time
 		var new_rotation = timer_percent_complete * 720

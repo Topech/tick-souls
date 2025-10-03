@@ -16,7 +16,7 @@ var is_activated: bool = false
 
 
 ## runs every tick if effect is enabled and activated.
-func apply(delta: float):
+func apply(_delta: float):
 	assert(false, "Override this base fn...")
 
 

@@ -12,7 +12,7 @@ var round_duration: int = 0
 
 
 func _ready() -> void:
-	$TweezerSpawnTimer.wait_time = 5
+	$TweezerSpawnTimer.wait_time = 10
 	$TweezerSpawnTimer.start()
 
 	var backgrounds = [
