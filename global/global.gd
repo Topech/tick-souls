@@ -26,10 +26,10 @@ class PlayerDetails:
 
 
 var player_details_lookup = {
-	players.PLAYER_1: PlayerDetails.new("Big Steve", Color.hex(0x99e900FF)),
-	players.PLAYER_2: PlayerDetails.new("Lil Jimmy", Color.hex(0xffbaa9FF)),
-	players.PLAYER_3: PlayerDetails.new("Sneaky Sammy", Color.hex(0x93d9f7FF)),
-	players.PLAYER_4: PlayerDetails.new("Dingus Dirk", Color.hex(0xded300FF)),
+	players.PLAYER_1: PlayerDetails.new("Big Steve", Color.hex(0xff0000FF)),
+	players.PLAYER_2: PlayerDetails.new("Lil Jimmy", Color.hex(0xeeff00FF)),
+	players.PLAYER_3: PlayerDetails.new("Sneaky Sammy", Color.hex(0x37ff00FF)),
+	players.PLAYER_4: PlayerDetails.new("Dingus Dirk", Color.hex(0x2b72ffFF)),
 }
 
 

@@ -19,4 +19,4 @@ func _process(delta: float) -> void:
 			continue
 
 		if player.state == player.states.SUCKING:
-			health_bar.value -= 5.0 * delta
+			health_bar.value -= 2.0 * delta
