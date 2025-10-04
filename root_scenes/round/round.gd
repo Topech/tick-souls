@@ -71,7 +71,7 @@ func _on_timer_timeout() -> void:
 	tweezers.failed.connect(_on_tweezers_failed)
 	const min_spawn_rate = 0.5
 	const max_spawn_rate = 10.0
-	const secs_until_max_spawn_rate = 120.0
+	const secs_until_max_spawn_rate = 60.0
 	var new_wait_time = max(
 		min_spawn_rate,
 		max_spawn_rate - (max_spawn_rate - min_spawn_rate) * (float(round_duration) / secs_until_max_spawn_rate)

@@ -31,6 +31,7 @@ vframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionBox"]
 shape = SubResource("CapsuleShape2D_yy71b")
+disabled = true
 
 [node name="PlayerSuckingBox" type="Area2D" parent="."]
 collision_layer = 5

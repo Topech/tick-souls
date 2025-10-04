@@ -130,9 +130,9 @@ func _process(delta: float) -> void:
 	# sync nodes
 	walk_effect.speed = metrics.speed
 	walk_effect.direction = walk_event.direction
-	roll_effect.roll_direction = walk_event.direction
+	roll_effect.roll_direction = walk_event.direction * metrics.speed
 	roll_effect.roll_speed = 1.5 * metrics.base_speed + 2 * metrics.blood
-	roll_effect.roll_cooldown_duration = 1.0 + 1.0 * (metrics.blood / 100)
+	roll_effect.roll_cooldown_duration = 1.0 + 0.5 * (metrics.blood / 100)
 
 	var old_state: states = state
 

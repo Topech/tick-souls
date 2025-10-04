@@ -21,6 +21,14 @@ signal health_stage_depleted
 ]
 
 
+func _ready() -> void:
+	var player_count = PlayerInputDevices.get_all_players().size()
+	var new_health = 15 + 10 * player_count
+	for bar in health_bar_stages_remaining:
+		bar.max_value = new_health
+		bar.value = new_health
+
+
 func get_current_health_bar_stage() -> ProgressBar:
 	if len(health_bar_stages_remaining) == 0:
 		return null

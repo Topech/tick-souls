@@ -9,6 +9,7 @@ signal round_ended
 
 ## in secs
 var round_duration: int = 0
+var stage_duration: int = 0
 
 var prev_boss_health_bar: float = 0.0;
 var suck_current_intensity: float = 0.1;
@@ -64,31 +65,47 @@ func _on_tweezers_failed(tweezer: Tweezers) -> void:
 
 
 func _on_tweezer_spawn_timer_timeout() -> void:
-	var tweezers = preload("res://tweezers/tweezers.tscn").instantiate()
-	tweezers.target_node = player_container.choose_random_player()
+	var tweezer_count = 1
+	if PlayerInputDevices.get_all_players().size() > 2:
+		tweezer_count = 2
+
+	for _ii in range(tweezer_count):
+		var tweezers = preload("res://tweezers/tweezers.tscn").instantiate()
+		
+		for jj in range(10):
+			tweezers.target_node = player_container.choose_random_player()
+			if tweezers.target_node.state != tweezers.target_node.states.TWEEZED:
+				break
 	
-	var screen_size = get_viewport().get_visible_rect().size
-	tweezers.position = Vector2(
-		screen_size.x * randf(),
-		screen_size.y * randf(),
+		var screen_size = get_viewport().get_visible_rect().size
+		tweezers.position = Vector2(
+			screen_size.x * randf(),
+			screen_size.y * randf(),
+		)
+		add_child(tweezers)
+		tweezers.tweezed_player.connect((_on_tweezers_tweezed_player))
+		tweezers.failed.connect(_on_tweezers_failed)
+	
+	const min_spawn_rate = 0.5
+	const max_spawn_rate = 10.0
+	const secs_until_max_spawn_rate = 30
+
+	var new_wait_time = max(
+		min_spawn_rate,
+		max_spawn_rate - (max_spawn_rate - min_spawn_rate) * (float(stage_duration) / secs_until_max_spawn_rate)
 	)
-	add_child(tweezers)
-	tweezers.tweezed_player.connect((_on_tweezers_tweezed_player))
-	tweezers.failed.connect(_on_tweezers_failed)
-	var new_wait_time = {
-		1: 10,
-		2: 9,
-		3: 8,
-		4: 8
-	}.get(len($Boss.health_bar_stages_remaining))
 	$TweezerSpawnTimer.wait_time = new_wait_time
 
 
 func _on_round_timer_timeout() -> void:
 	round_duration += 1
+	stage_duration += 1
 
 
 func _on_boss_health_stage_depleted() -> void:
+	# reset spawn timing
+	stage_duration = 0
+	
 	for player in player_container.get_all_players():
 		# this gives them speed again
 		if player.state == player.states.TWEEZED:
@@ -122,3 +139,7 @@ func _on_boss_health_stage_depleted() -> void:
 		)
 	)
 	$PlayerSpawner.spawn_players(dead_players)
+	
+	for child in get_children():
+		if is_instance_of(child, Tweezers):
+			child.queue_free()
