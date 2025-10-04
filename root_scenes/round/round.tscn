@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ll1pmd436rgx"]
+[gd_scene load_steps=21 format=3 uid="uid://ll1pmd436rgx"]
 
 [ext_resource type="Script" uid="uid://c3s7xjasqsoxb" path="res://root_scenes/round/round.gd" id="1_v6yer"]
 [ext_resource type="Script" uid="uid://7vw62jfhqglr" path="res://root_scenes/round/player_spawner.gd" id="2_j0dvr"]
@@ -10,7 +10,14 @@
 [ext_resource type="Script" uid="uid://y35pcjkdfkk1" path="res://root_scenes/round/barrier_spawner.gd" id="8_siu77"]
 [ext_resource type="Script" uid="uid://daq7b4e7y0wc5" path="res://root_scenes/round/barrier_container.gd" id="9_efv08"]
 [ext_resource type="Script" uid="uid://btj4a0fqnffa" path="res://randomise_music.gd" id="10_l55id"]
-[ext_resource type="Script" uid="uid://d0sin1she2i7h" path="res://root_scenes/round/ScreenShake.gd" id="11_idtc3"]
+[ext_resource type="AudioStream" uid="uid://bpey2wglj5q0v" path="res://assets/music/rounds/8-bit-console-from-my-childhood-301286.mp3" id="11_24pdy"]
+[ext_resource type="Script" path="res://root_scenes/round/ScreenShake.gd" id="11_idtc3"]
+[ext_resource type="AudioStream" uid="uid://nv15kf4h3qs6" path="res://assets/music/rounds/retro-arcade-game-music-396890.mp3" id="12_ls7l8"]
+[ext_resource type="AudioStream" uid="uid://bx5306gbcjtid" path="res://assets/music/rounds/retro-game-arcade-236133.mp3" id="13_52rxd"]
+[ext_resource type="AudioStream" uid="uid://cyxexx56om3sq" path="res://assets/music/rounds/retro-game-music-245230.mp3" id="14_ghtj8"]
+[ext_resource type="AudioStream" uid="uid://8b67syqy6o0m" path="res://assets/music/rounds/the-console-of-my-dreams-301289.mp3" id="15_6w0ir"]
+[ext_resource type="AudioStream" uid="uid://exor2od56bbd" path="res://assets/music/rounds/the-return-of-the-8-bit-era-301292.mp3" id="16_flmu8"]
+[ext_resource type="AudioStream" uid="uid://dyi7q7r8jaui7" path="res://assets/music/rounds/the-world-of-8-bit-games-301273.mp3" id="17_d328q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(20, 480)
@@ -109,7 +116,7 @@ player_id = 4
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 volume_db = -10.306
 script = ExtResource("10_l55id")
-audio_dir = "res://assets/music/rounds"
+resources = Array[AudioStream]([ExtResource("11_24pdy"), ExtResource("12_ls7l8"), ExtResource("13_52rxd"), ExtResource("14_ghtj8"), ExtResource("15_6w0ir"), ExtResource("16_flmu8"), ExtResource("17_d328q")])
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("11_idtc3")
