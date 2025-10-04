@@ -57,18 +57,23 @@ func _on_tweezers_failed(tweezer: Tweezers) -> void:
 
 
 func _on_timer_timeout() -> void:
-	var tweezers = preload("res://tweezers/tweezers.tscn").instantiate()
-	tweezers.target_node = player_container.choose_random_player()
-	
-	var screen_size = get_viewport().get_visible_rect().size
-	tweezers.position = Vector2(
-		screen_size.x * randf(),
-		screen_size.y * randf(),
-	)
-	
-	add_child(tweezers)
-	tweezers.tweezed_player.connect((_on_tweezers_tweezed_player))
-	tweezers.failed.connect(_on_tweezers_failed)
+	var tweezer_count = 1
+	if PlayerInputDevices.get_all_players().size() > 2:
+		tweezer_count = 2
+
+	for _ii in range(tweezer_count):
+		var tweezers = preload("res://tweezers/tweezers.tscn").instantiate()
+		tweezers.target_node = player_container.choose_random_player()
+		
+		var screen_size = get_viewport().get_visible_rect().size
+		tweezers.position = Vector2(
+			screen_size.x * randf(),
+			screen_size.y * randf(),
+		)
+		
+		add_child(tweezers)
+		tweezers.tweezed_player.connect((_on_tweezers_tweezed_player))
+		tweezers.failed.connect(_on_tweezers_failed)
 	const min_spawn_rate = 0.5
 	const max_spawn_rate = 10.0
 	const secs_until_max_spawn_rate = 60.0
