@@ -14,10 +14,10 @@ signal health_stage_depleted
 
 
 @onready var health_bar_stages_remaining = [
-	health_bar_stage_4,
-	health_bar_stage_3,
-	health_bar_stage_2,
 	health_bar_stage_1,
+	health_bar_stage_2,
+	health_bar_stage_3,
+	health_bar_stage_4,
 ]
 
 

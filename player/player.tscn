@@ -1,16 +1,17 @@
-[gd_scene load_steps=35 format=3 uid="uid://bkr5pvw2bknjq"]
+[gd_scene load_steps=36 format=3 uid="uid://bkr5pvw2bknjq"]
 
 [ext_resource type="Script" uid="uid://btblkgunmjv2b" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="PackedScene" uid="uid://cqydmebpscy8v" path="res://input/input_direction.tscn" id="2_g1dw6"]
 [ext_resource type="Script" uid="uid://kod7kr5fsols" path="res://player/visual_body_2d.gd" id="3_2ieo8"]
 [ext_resource type="Texture2D" uid="uid://b8ixsh1x6qjjl" path="res://assets/Kanagroo Tick-1.png" id="3_ebec5"]
 [ext_resource type="Script" uid="uid://rikx34kyj34c" path="res://player/roll_event.gd" id="7_8t03j"]
+[ext_resource type="Script" uid="uid://bolqcc24kje7o" path="res://player/player_event.gd" id="8_5ejfk"]
 [ext_resource type="Script" uid="uid://cmdbn34ujm0yj" path="res://player/walk_event.gd" id="8_hg6s5"]
 [ext_resource type="Script" uid="uid://cf2mh5mh8xog4" path="res://player/roll_effect.gd" id="8_rgyib"]
 [ext_resource type="Script" uid="uid://bbtkth686muil" path="res://player/suck_event.gd" id="9_8t03j"]
 [ext_resource type="Script" uid="uid://dp3o8bs03t0xc" path="res://player/walk_effect.gd" id="9_hg6s5"]
 [ext_resource type="Script" uid="uid://cnvmughkpjjx7" path="res://player/suck_effect.gd" id="10_8t03j"]
-[ext_resource type="Script" uid="uid://d0onuxcyx8daq" path="res://player/tweeze_effect.gd" id="12_ebec5"]
+[ext_resource type="Script" uid="uid://d0onuxcyx8daq" path="res://player/tweeze_event.gd" id="12_ebec5"]
 [ext_resource type="AudioStream" uid="uid://dbnmk11hxru5b" path="res://assets/sound_effects/suck/sucking-1.mp3" id="13_1s1yo"]
 [ext_resource type="Script" uid="uid://em8w0uk5lckw" path="res://randomise_audio.gd" id="13_kb6p2"]
 [ext_resource type="AudioStream" uid="uid://8cu8ufqmh3iv" path="res://assets/sound_effects/squeeze/squeeze-1.mp3" id="13_rptt4"]
@@ -102,6 +103,13 @@ script = ExtResource("9_8t03j")
 [node name="RollEvent" type="Node" parent="."]
 script = ExtResource("7_8t03j")
 
+[node name="TweezeEvent" type="Node" parent="."]
+script = ExtResource("12_ebec5")
+
+[node name="PushEvent" type="Node" parent="."]
+script = ExtResource("8_5ejfk")
+metadata/_custom_type_script = "uid://bolqcc24kje7o"
+
 [node name="WalkEffect" type="Node" parent="." node_paths=PackedStringArray("target_move_node")]
 script = ExtResource("9_hg6s5")
 target_move_node = NodePath("..")
@@ -121,9 +129,6 @@ one_shot = true
 
 [node name="RollCooldownTimer" type="Timer" parent="RollEffect"]
 one_shot = true
-
-[node name="TweezeEvent" type="Node" parent="."]
-script = ExtResource("12_ebec5")
 
 [node name="SuckAudio" type="AudioStreamPlayer" parent="."]
 volume_db = 24.0

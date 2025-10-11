@@ -8,6 +8,7 @@ enum states {
 	SUCKING,
 	ROLLING,
 	TWEEZED,
+	PUSHED,
 }
 
 enum SpecialStateTransistions {
@@ -24,6 +25,7 @@ var transitions = {
 	states.SUCKING: SpecialStateTransistions.ANY,
 	states.ROLLING: [states.IDLE, states.WALKING, states.SUCKING],
 	states.TWEEZED: SpecialStateTransistions.NONE,
+	states.PUSHED: [states.IDLE],
 }
 
 
@@ -89,6 +91,8 @@ var suck_strategy: PlayerSuckStrategy
 @onready var roll_event = $RollEvent
 @onready var suck_event = $SuckEvent
 @onready var tweeze_event = $TweezeEvent
+@onready var push_event = $PushEvent
+var push_direction: Vector2
 
 @onready var roll_effect = $RollEffect
 @onready var walk_effect = $WalkEffect
@@ -126,13 +130,6 @@ func _process(delta: float) -> void:
 	# ! DEBUG ONLY
 	if (Input.is_key_pressed(KEY_P)):
 		queue_free()
-	
-	# sync nodes
-	walk_effect.speed = metrics.speed
-	walk_effect.direction = walk_event.direction
-	roll_effect.roll_direction = walk_event.direction * metrics.speed
-	roll_effect.roll_speed = 1.5 * metrics.base_speed + 2 * metrics.blood
-	roll_effect.roll_cooldown_duration = 1.0 + 0.5 * (metrics.blood / 100)
 
 	var old_state: states = state
 
@@ -140,9 +137,14 @@ func _process(delta: float) -> void:
 	if tweeze_event.triggered:
 		state = transition(state, states.TWEEZED)
 		# Note: tweeze_event always ends in player free
+	if push_event.triggered:
+		state = transition(state, states.PUSHED)
+		push_event.clear()
+	
+	# pause all state changes if rolling or pushed
 	if roll_effect.is_activated:
-		# pause all state changes if rolling
 		pass
+
 	elif suck_event.triggered:
 		state = transition(state, states.SUCKING)
 		# Note: suck_event clears itself
@@ -175,13 +177,34 @@ func _process(delta: float) -> void:
 				play_tweezed_audio()
 
 		states.WALKING:
+			walk_effect.speed = metrics.speed
+			walk_effect.direction = walk_event.direction
+			
 			walk_effect.enabled = true
 			if not walk_effect.is_activated:
 				walk_effect.activate()
 			roll_effect.enabled = false
 			suck_effect.enabled = false
 
+		states.PUSHED:
+			if old_state != states.PUSHED:
+				metrics.blood = 0
+
+			roll_effect.roll_direction = push_direction
+			roll_effect.roll_speed = 500
+			roll_effect.roll_cooldown_duration = 1.0 + 0.5 * (metrics.blood / 100)
+
+			roll_effect.enabled = true
+			if not roll_effect.is_activated:
+				roll_effect.activate()
+			suck_effect.enabled = false
+			walk_effect.enabled = false
+			
 		states.ROLLING:
+			roll_effect.roll_direction = walk_event.direction * metrics.speed
+			roll_effect.roll_speed = 1.5 * metrics.base_speed + 2 * metrics.blood
+			roll_effect.roll_cooldown_duration = 1.0 + 0.5 * (metrics.blood / 100)
+
 			roll_effect.enabled = true
 			if not roll_effect.is_activated:
 				roll_effect.activate()
@@ -226,6 +249,11 @@ func _process(delta: float) -> void:
 
 func tweeze():
 	tweeze_event.trigger()
+
+
+func push(direction):
+	push_direction = direction
+	push_event.trigger()
 
 
 func play_tweezed_audio():

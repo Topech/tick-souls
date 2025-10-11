@@ -111,18 +111,9 @@ func _on_boss_health_stage_depleted() -> void:
 		if player.state == player.states.TWEEZED:
 			# don't need to force roll
 			continue
-		player.metrics.blood = 0
-		# super hacky way to force to roll, maybe breaks state machine???
 		var away_from_boss = player.global_position - $Boss.global_position
-		player.state = player.states.ROLLING
-		player.roll_effect.roll_direction = away_from_boss.normalized()
-		player.roll_effect.is_in_cooldown = false
-		player.roll_effect.roll_speed = 500
-		player.roll_effect.enabled = true
-		player.roll_effect.activate()
-		# these are just in case you sucking
-		player.suck_effect.deactivate()
-		player.suck_audio.stop()
+		player.push(away_from_boss)
+
 		
 	$BarrierSpawner.spawn_barriers(6)
 	boss_audio.randomise_sound()
