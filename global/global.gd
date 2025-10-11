@@ -38,6 +38,11 @@ var player_details_lookup = {
 }
 
 
+func clear_all_player_scores():
+	for player_details in player_details_lookup.values():
+		player_details.score = 0
+
+
 enum SuckStrategyType {
 	STANDARD,
 	BOSS,

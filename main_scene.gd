@@ -40,6 +40,10 @@ func _on_leaderboard_continue() -> void:
 	round_leaderboard = null
 	
 func _on_win_board_continue() -> void:
+	# reset for new game
+	rounds_completed = 0
+	Global.clear_all_player_scores()
+	
 	main_menu = preload("res://root_scenes/main_menu/main_menu.tscn").instantiate()
 	main_menu.start_game.connect(_on_main_menu_start_game)
 	main_menu.start_boss.connect(_on_main_menu_start_boss)
